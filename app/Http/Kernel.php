@@ -41,7 +41,6 @@ class Kernel extends HttpKernel
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             'throttle:api',
-            \Fruitcake\Cors\HandleCors::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];

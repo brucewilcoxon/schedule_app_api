@@ -9,25 +9,16 @@ class Cors
 {
     public function handle(Request $request, Closure $next)
     {
-        $response = $next($request);
-
-        // Allow your frontend domain only or use '*' for all origins (not recommended for production)
-        $response->headers->set('Access-Control-Allow-Origin', 'https://mrservice.jp');
-        
-        // Allowed HTTP methods
-        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-        
-        // Allowed headers
-        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-        
-        // Allow credentials if needed
-        $response->headers->set('Access-Control-Allow-Credentials', 'true');
-
-        // Handle preflight requests
         if ($request->getMethod() === "OPTIONS") {
-            $response->setStatusCode(204);
-            return $response;
+            $response = response('', 204);
+        } else {
+            $response = $next($request);
         }
+
+        $response->headers->set('Access-Control-Allow-Origin', 'https://mrservice.jp');
+        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
+        $response->headers->set('Access-Control-Allow-Credentials', 'true');
 
         return $response;
     }
