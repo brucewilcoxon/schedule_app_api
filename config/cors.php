@@ -1,13 +1,10 @@
 <?php
 
 return [
-    'paths' => ['api/*'], // Apply CORS to API routes
-    'allowed_methods' => ['*'], // Allow all methods like GET, POST
-    'allowed_origins' => ['https://mrservice.jp'], // Only allow your frontend domain
-    'allowed_origins_patterns' => [],
-    'allowed_headers' => ['*'], // Allow all headers
-    'exposed_headers' => [],
-    'max_age' => 0,
+    'paths' => ['api/*'],  // should match your API route prefix
+    'allowed_methods' => ['*'],  // allow all HTTP methods
+    'allowed_origins' => ['https://mrservice.jp'],  // frontend domain exactly
+    'allowed_headers' => ['*'],  // allow all headers
     'supports_credentials' => false,
 ];
 
