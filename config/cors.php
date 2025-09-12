@@ -5,7 +5,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['https://mrservice.jp'],
 
     'allowed_origins_patterns' => [],
 
