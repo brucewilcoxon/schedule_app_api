@@ -1,21 +1,13 @@
 <?php
 
 return [
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
-
-    'allowed_methods' => ['*'],
-
-    'allowed_origins' => ['https://mrservice.jp'],
-
+    'paths' => ['api/*'], // Apply CORS to API routes
+    'allowed_methods' => ['*'], // Allow all methods like GET, POST
+    'allowed_origins' => ['https://mrservice.jp'], // Only allow your frontend domain
     'allowed_origins_patterns' => [],
-
-    'allowed_headers' => ['*'],
-
+    'allowed_headers' => ['*'], // Allow all headers
     'exposed_headers' => [],
-
     'max_age' => 0,
-
-    'supports_credentials' => true,
-    
-    'allow_credentials' => true,
+    'supports_credentials' => false,
 ];
+
