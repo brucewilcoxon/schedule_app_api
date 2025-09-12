@@ -70,7 +70,7 @@ Route::middleware(['web'])->group(function () {
         Route::post('/profile/upload-image', [UserProfileController::class, 'uploadImage'])->name('profile.uploadImage');
 
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
-        Route::get('/users/gradeFilter', [UserController::class, 'gradeFilter'])->name('users.index');
+        Route::get('/users/gradeFilter', [UserController::class, 'gradeFilter'])->name('users.filters');
         Route::post('/users', [UserController::class, 'store'])->name('users.store');
         Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
         Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
