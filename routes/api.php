@@ -130,3 +130,7 @@ Route::middleware(['web'])->group(function () {
         Route::delete('/refrigerant-workplaces/{id}', [RefrigerantWorkplaceController::class, 'destroy'])->name('refrigerant-workplaces.destroy');
     });
 });
+
+Route::options('/{any}', function () {
+    return response()->json([], 204);
+})->where('any', '.*');
