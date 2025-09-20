@@ -16,14 +16,13 @@ return [
     */
 
  'stateful' => explode(',', sprintf(
-    '%s,%s,%s,%s',
+    '%s,%s,%s,%s,%s',
+    'mrservice.jp',
+    'api.mrservice.jp',
     'windap.jp',
     'api.windap.jp',
-    'localhost:3000',
-    'localhost:8000',
-    '127.0.0.1:8000,::1'
+    'localhost:3000,localhost:8000,127.0.0.1:8000,::1'
 )),
-
 
     /*
     |--------------------------------------------------------------------------
