@@ -22,8 +22,8 @@ class UserSeeder extends Seeder
        });
 
         $specificUser = User::create([
-            'email' => 'user1@mail.com',
-            'password' => Hash::make('password'),
+            'email' => 'manager@gmail.com',
+            'password' => Hash::make('mrservice'),
         ]);
 
         UserProfile::create([
