@@ -14,9 +14,14 @@ class NotificationResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        // Prefer human-friendly type saved in data['type'] when present
+        $displayType = is_array($this->data) && array_key_exists('type', $this->data)
+            ? $this->data['type']
+            : $this->type;
+
         return [
             'id' => $this->id,
-            'type' => $this->type,
+            'type' => $displayType,
             'notifiable_id' => $this->notifiable_id,
             'notifiable_type' => $this->notifiable_type,
             'data' => $this->data,

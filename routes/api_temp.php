@@ -68,14 +68,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/profile', [UserProfileController::class, 'store'])->name('profile.update');
     Route::post('/profile/upload-image', [UserProfileController::class, 'uploadImage'])->name('profile.uploadImage');
 
-    // Manager-only routes for user management
+    // User Management routes - restricted to managers only
     Route::middleware(['role:manager'])->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
-        Route::get('/users/gradeFilter', [UserController::class, 'gradeFilter'])->name('users.filters');
-        Route::post('/users', [UserController::class, 'store'])->name('users.store');
-        Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
-        Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
-    });
+    Route::get('/users/gradeFilter', [UserController::class, 'gradeFilter'])->name('users.filters');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
     Route::post('/windNote', [WindNoteController::class, 'store'])->name('windNote.store');
     Route::get('/windNote/{windNote}', [WindNoteController::class, 'show'])->name('windNote.show');
@@ -128,5 +127,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/refrigerant-workplaces', [RefrigerantWorkplaceController::class, 'store'])->name('refrigerant-workplaces.store');
     Route::put('/refrigerant-workplaces/{id}', [RefrigerantWorkplaceController::class, 'update'])->name('refrigerant-workplaces.update');
     Route::delete('/refrigerant-workplaces/{id}', [RefrigerantWorkplaceController::class, 'destroy'])->name('refrigerant-workplaces.destroy');
-});
-
+    }); // Close the manager middleware group
+}); // Close the auth:sanctum middleware group
+?>
