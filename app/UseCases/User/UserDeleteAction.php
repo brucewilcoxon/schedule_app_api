@@ -61,13 +61,6 @@ class UserDeleteAction
             $noteFavoritesDeleted = $user->notefavorites()->delete();
             \Log::info('Note favorites deleted:', ['deleted_count' => $noteFavoritesDeleted]);
             
-            // Delete departures (these have cascade, but let's be explicit)
-            $departuresDeleted = $user->departures()->delete();
-            \Log::info('Departures deleted:', ['deleted_count' => $departuresDeleted]);
-            
-            // Delete intra departures
-            $intraDeparturesDeleted = $user->intraDepartures()->delete();
-            \Log::info('Intra departures deleted:', ['deleted_count' => $intraDeparturesDeleted]);
             
             // Delete claims
             $claimsDeleted = $user->claims()->delete();

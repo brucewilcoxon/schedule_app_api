@@ -10,7 +10,7 @@ class IntraClaimShowAction
 {
     public function __invoke(IntraClaim $intraClaim ,IntraClaimShowRequest $request)
     {
-        $intraClaim->load(['departure', 'user.userProfile', 'intraUser.userProfile']);
+        $intraClaim->load(['user.userProfile', 'intraUser.userProfile']);
         return response()->json(new IntraClaimResource(($intraClaim)));
     }
 }

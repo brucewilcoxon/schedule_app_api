@@ -12,7 +12,6 @@ class IntraClaim extends Model
     protected $fillable = [
         'intra_user_id',
         'user_id',
-        'departure_id',
         'status',
     ];
 
@@ -26,8 +25,4 @@ class IntraClaim extends Model
         return $this->belongsTo(User::class, 'intra_user_id');
     }
 
-    public function departure()
-    {
-        return $this->belongsTo(Departure::class, 'departure_id');
-    }
 }

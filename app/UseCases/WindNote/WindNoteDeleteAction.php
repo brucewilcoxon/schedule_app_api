@@ -12,7 +12,8 @@ class WindNoteDeleteAction
     {
         $user = Auth::user();
 
-        if ($user->id !== $windNote->user_id) {
+        // Allow managers to delete any note, or users to delete their own notes
+        if (!$user->isManager() && $user->id !== $windNote->user_id) {
             return response()->json([
                 'message' => '削除する権限がありません',
             ], 403);

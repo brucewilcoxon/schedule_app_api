@@ -73,15 +73,6 @@ class User extends Authenticatable
         return $this->hasMany(NoteFavorite::class);
     }
 
-    public function departures()
-    {
-        return $this->hasMany(Departure::class, 'user_id');
-    }
-
-    public function intraDepartures()
-    {
-        return $this->hasMany(Departure::class, 'intra_user_id');
-    }
 
     public function claims()
     {

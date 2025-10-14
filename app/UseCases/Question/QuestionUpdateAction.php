@@ -11,8 +11,10 @@ class QuestionUpdateAction
     public function __invoke(QuestionUpdateRequest $request, Question $question)
     {
         $validated = $request->validated();
+        $user = $request->user();
 
-        if ($request->user()->id !== $question->user_id) {
+        // Allow managers to edit any question, or users to edit their own questions
+        if (!$user->isManager() && $user->id !== $question->user_id) {
             return response()->json(
                 ['error' => '質問を編集する権限がありません'
             ], 403);

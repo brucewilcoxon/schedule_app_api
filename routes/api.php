@@ -3,9 +3,6 @@
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CalendarEventController;
-use App\Http\Controllers\DepartureController;
-use App\Http\Controllers\DepartureRankingController;
-use App\Http\Controllers\DepartureStatusController;
 use App\Http\Controllers\IntraClaimController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NoteFavoriteController;
@@ -17,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WindNoteController;
 use App\Http\Controllers\RefrigerantWorkplaceController;
+use App\Http\Controllers\GasController;
 use App\Http\Resources\UserResource;
 use App\Models\IntraClaim;
 use Illuminate\Http\Request;
@@ -38,13 +36,20 @@ use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::get('/windNotes', [WindNoteController::class, 'index'])->name('windNote.index');
-Route::get('/departures', [DepartureController::class, 'index'])->name('departures.index');
-Route::get('/departures/rankings', [DepartureRankingController::class, 'index'])->name('departures.ranking');
-Route::get('/departures/status', [DepartureStatusController::class, 'index'])->name('departures.status');
 Route::get('/questions', [QuestionController::class, 'index'])->name('question.index');
 Route::get('/calendars', [CalendarEventController::class, 'index'])->name('calendarEvent.index');
 Route::get('/answers', [AnswerController::class, 'index'])->name('answer.index');
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+
+// Gas management public read routes (no auth required)
+Route::get('/gas', [GasController::class, 'index'])->name('gas.index');
+Route::get('/gas-types', [GasController::class, 'getGasTypes'])->name('gas.types');
+Route::get('/prefectures', [GasController::class, 'getPrefectures'])->name('gas.prefectures');
+// Allow creating sample records without auth for the demo UI
+Route::post('/gas', [GasController::class, 'store'])->name('gas.store');
+// Allow updating and deleting in demo without auth
+Route::put('/gas/{gas}', [GasController::class, 'update'])->name('gas.update');
+Route::delete('/gas/{gas}', [GasController::class, 'destroy'])->name('gas.destroy');
 
 // 認証必要ルート
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -98,10 +103,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/windNote/{windNote}/favorite', [NoteFavoriteController::class, 'show'])->name('noteFavorite.show');
     Route::put('/windNote/{windNote}/favorite', [NoteFavoriteController::class, 'update'])->name('noteFavorite.update');
 
-    Route::post('/departure', [DepartureController::class, 'store'])->name('departures.store');
-    Route::get('/departure/{departure}', [DepartureController::class, 'show'])->name('departures.show');
-    Route::put('/departure/{departure}', [DepartureController::class, 'update'])->name('departures.update');
-    Route::delete('/departure/{departure}', [DepartureController::class, 'destroy'])->name('departures.destroy');
 
     // 出艇ランキング
     Route::post('/approveClaim/{intraClaim}', [IntraClaimController::class, 'approveClaim'])->name('intraClaim.approveClaim');
@@ -128,5 +129,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/refrigerant-workplaces', [RefrigerantWorkplaceController::class, 'store'])->name('refrigerant-workplaces.store');
     Route::put('/refrigerant-workplaces/{id}', [RefrigerantWorkplaceController::class, 'update'])->name('refrigerant-workplaces.update');
     Route::delete('/refrigerant-workplaces/{id}', [RefrigerantWorkplaceController::class, 'destroy'])->name('refrigerant-workplaces.destroy');
+
+    // Gas Management routes (kept empty here; public routes declared above for demo)
 });
 

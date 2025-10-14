@@ -4,7 +4,6 @@ namespace App\UseCases\IntraClaim;
 
 use App\Http\Requests\IntraClaim\IntraApproveClaimRequest;
 use App\Http\Resources\Common\SuccessResource;
-use App\Models\Departure;
 use App\Models\IntraClaim;
 use App\Models\User;
 use App\Notifications\IntraClaimNotification;
@@ -17,10 +16,8 @@ class IntraApproveClaimAction
         $intraUser = $request->user();
         $intraUserName = $intraUser->userProfile->name;
 
-        $departure = $intraClaim->departure;
-
         // イントラを依頼したユーザ
-        $departureUser = User::find($departure->user_id);
+        $departureUser = User::find($intraClaim->user_id);
         $departureUserName = $departureUser->userProfile->name;
 
         if ($request->user()->id !== $intraClaim->intra_user_id) {
@@ -29,17 +26,13 @@ class IntraApproveClaimAction
             ], 403);
         }
 
-        $departure->update(['intra_user_id' => $intraUser->id]);
-
          // intraClaimのstatusを更新
         $intraClaim->update(['status' => 'approve']);
 
         $comment = "{$intraUserName}さんと{$departureUserName}のイントラが確定しました";
 
-        $departure->refresh();
-
-        $departureUser->notify(new IntraClaimNotification($intraClaim, $comment, $departure));
-        $intraUser->notify(new IntraClaimNotification($intraClaim, $comment, $departure));
+        $departureUser->notify(new IntraClaimNotification($intraClaim, $comment));
+        $intraUser->notify(new IntraClaimNotification($intraClaim, $comment));
 
         return new SuccessResource('イントラを承諾しました');
     }

@@ -12,14 +12,12 @@ class IntraRejectAction
 {
     public function __invoke(IntraClaim $intraClaim, IntraRejectRequest $request)
     {
-        $departure = $intraClaim->departure;
-
         // ログインユーザ(イントラを依頼されたユーザ)
         $intraUser = User::find($request->user()->id);
         $intraUserName = $intraUser->userProfile->name;
 
         // イントラを依頼したユーザ
-        $departureUser = User::find($departure->user_id);
+        $departureUser = User::find($intraClaim->user_id);
 
         if ($intraUser->id !== $intraClaim->intra_user_id) {
             return response()->json([
@@ -32,7 +30,7 @@ class IntraRejectAction
         // intraClaimのstatusを更新
         $intraClaim->update(['status' => 'reject']);
         
-        $departureUser->notify(new IntraClaimNotification($intraClaim, $comment, $departure));
+        $departureUser->notify(new IntraClaimNotification($intraClaim, $comment));
 
         return new SuccessResource('イントラ依頼を取り下げました');
     }

@@ -17,7 +17,6 @@ class IntraClaimResource extends JsonResource
       return [
             'id' => $this->id,
             'status' => $this->status,
-            'departure' => new DepartureResource($this->whenLoaded('departure')),
             'user' => new UserResource($this->whenLoaded('user')),
             'intra_user' => new UserResource($this->whenLoaded('intraUser'))
       ];

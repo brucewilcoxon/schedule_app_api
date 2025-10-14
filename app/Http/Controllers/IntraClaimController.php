@@ -7,7 +7,6 @@ use App\Http\Requests\IntraClaim\IntraClaimCreateRequest;
 use App\Http\Requests\IntraClaim\IntraClaimindexRequest;
 use App\Http\Requests\IntraClaim\IntraClaimShowRequest;
 use App\Http\Requests\IntraClaim\IntraRejectRequest;
-use App\Models\Departure;
 use App\Models\IntraClaim;
 use App\UseCases\IntraClaim\IntraApproveClaimAction;
 use App\UseCases\IntraClaim\IntraClaimCreateAction;

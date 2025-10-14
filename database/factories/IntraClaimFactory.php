@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Departure;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +19,6 @@ class IntraClaimFactory extends Factory
     {
         return [
             'user_id' => User::factory()->create(),
-            'departure_id' => Departure::factory()->create()
         ];
     }
 }

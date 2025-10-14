@@ -16,7 +16,7 @@ class IntraClaimindexAction
         $intraClaims = IntraClaim::where(function($query) use ($userId) {
             $query->where('user_id', $userId)
                 ->orWhere('intra_user_id', $userId);
-        })->with(['departure', 'user.userProfile', 'intraUser.userProfile'])->get();
+        })->with(['user.userProfile', 'intraUser.userProfile'])->get();
 
         return response()->json(IntraClaimResource::collection($intraClaims));
     }

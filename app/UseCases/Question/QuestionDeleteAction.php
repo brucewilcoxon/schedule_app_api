@@ -12,7 +12,8 @@ class QuestionDeleteAction
     {
         $user = Auth::user();
 
-        if ($user->id !== $question->user_id) {
+        // Allow managers to delete any question, or users to delete their own questions
+        if (!$user->isManager() && $user->id !== $question->user_id) {
             return response()->json([
                 'message' => '削除する権限がありません',
             ], 403);
