@@ -41,15 +41,7 @@ Route::get('/calendars', [CalendarEventController::class, 'index'])->name('calen
 Route::get('/answers', [AnswerController::class, 'index'])->name('answer.index');
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 
-// Gas management public read routes (no auth required)
-Route::get('/gas', [GasController::class, 'index'])->name('gas.index');
-Route::get('/gas-types', [GasController::class, 'getGasTypes'])->name('gas.types');
-Route::get('/prefectures', [GasController::class, 'getPrefectures'])->name('gas.prefectures');
-// Allow creating sample records without auth for the demo UI
-Route::post('/gas', [GasController::class, 'store'])->name('gas.store');
-// Allow updating and deleting in demo without auth
-Route::put('/gas/{gas}', [GasController::class, 'update'])->name('gas.update');
-Route::delete('/gas/{gas}', [GasController::class, 'destroy'])->name('gas.destroy');
+// Gas management routes moved to authenticated section below
 
 // 認証必要ルート
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -114,6 +106,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/notification/{notification}/read', [NotificationController::class, 'read'])->name('notifications.read');
     Route::get('/notification/{notification}', [NotificationController::class, 'show'])->name('notification.show');
     Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])->name('notifications.readAll');
+
+    // Gas management routes (now require authentication)
+    Route::get('/gas', [GasController::class, 'index'])->name('gas.index');
+    Route::get('/gas-types', [GasController::class, 'getGasTypes'])->name('gas.types');
+    Route::get('/prefectures', [GasController::class, 'getPrefectures'])->name('gas.prefectures');
+    Route::post('/gas', [GasController::class, 'store'])->name('gas.store');
+    Route::put('/gas/{gas}', [GasController::class, 'update'])->name('gas.update');
+    Route::delete('/gas/{gas}', [GasController::class, 'destroy'])->name('gas.destroy');
 
     // Refrigerant Company routes
     Route::get('/refrigerant-companies', [RefrigerantCompanyController::class, 'index'])->name('refrigerant-companies.index');
