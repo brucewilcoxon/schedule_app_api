@@ -21,9 +21,9 @@ class CalendarEventUpdateTest extends TestCase
             'start' => '2024-05-29',
             'end' => '2024-05-29',
             'vehicle_info' => 'Updated Vehicle Info',
-            'repair_type' => '定期点検',
+            'repair_type' => ['定期点検', 'ベルト鳴き'],
             'workers' => ['田中太郎', '佐藤次郎'],
-            'status' => '進行中',
+            'status' => '作業中',
             'description' => 'Updated description',
             'is_delayed' => false
         ]);
@@ -32,7 +32,7 @@ class CalendarEventUpdateTest extends TestCase
         $this->assertDatabaseHas('calendar_events', [
             'id' => $calendarEvent->id,
             'vehicle_info' => 'Updated Vehicle Info',
-            'status' => '進行中'
+            'status' => '作業中'
         ]);
     }
 
@@ -46,7 +46,7 @@ class CalendarEventUpdateTest extends TestCase
             'start' => '2024-05-29',
             'end' => '2024-05-29',
             'vehicle_info' => 'Manager Updated Vehicle Info',
-            'repair_type' => '定期点検',
+            'repair_type' => ['定期点検', 'ベルト鳴き'],
             'workers' => ['田中太郎', '佐藤次郎'],
             'status' => '完了',
             'description' => 'Manager updated description',
@@ -71,9 +71,9 @@ class CalendarEventUpdateTest extends TestCase
             'start' => '2024-05-29',
             'end' => '2024-05-29',
             'vehicle_info' => 'Unauthorized Update',
-            'repair_type' => '定期点検',
+            'repair_type' => ['定期点検', 'ベルト鳴き'],
             'workers' => ['田中太郎', '佐藤次郎'],
-            'status' => '進行中',
+            'status' => '作業中',
             'description' => 'Unauthorized description',
             'is_delayed' => false
         ]);

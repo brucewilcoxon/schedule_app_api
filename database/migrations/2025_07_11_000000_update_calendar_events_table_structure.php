@@ -23,7 +23,7 @@ return new class extends Migration
                 $table->json('workers')->nullable()->comment('作業員 (JSON array of worker names)');
             }
             if (!Schema::hasColumn('calendar_events', 'status')) {
-                $table->enum('status', ['未開始', '進行中', '完了'])->default('未開始')->comment('ステータス');
+                $table->enum('status', ['未開始', '作業中', '見積り保留中', '部品待ち保留中', '完了', '連絡済み'])->default('未開始')->comment('ステータス');
             }
             if (!Schema::hasColumn('calendar_events', 'description')) {
                 $table->text('description')->nullable()->comment('修理作業の詳細な説明');

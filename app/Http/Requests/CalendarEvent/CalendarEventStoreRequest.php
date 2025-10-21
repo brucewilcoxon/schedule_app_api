@@ -38,8 +38,17 @@ class CalendarEventStoreRequest extends FormRequest
             ],
             'repair_type' => [
                 'nullable',
+                'array',
+                'max:3'
+            ],
+            'repair_type.*' => [
                 'string',
                 'max:255'
+            ],
+            'work_type' => [
+                'nullable',
+                'string',
+                'in:入庫作業,出張作業'
             ],
             'workers' => [
                 'nullable',
@@ -53,7 +62,7 @@ class CalendarEventStoreRequest extends FormRequest
             'status' => [
                 'nullable',
                 'string',
-                'in:未開始,進行中,完了'
+                'in:未開始,作業中,見積り保留中,部品待ち保留中,完了,連絡済み'
             ],
             'description' => [
                 'nullable',

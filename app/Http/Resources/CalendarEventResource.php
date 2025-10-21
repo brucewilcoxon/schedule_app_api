@@ -23,6 +23,7 @@ class CalendarEventResource extends JsonResource
             'end' => $this->end ? Carbon::parse($this->end)->format('Y-m-d') : null,
             'vehicle_info' => $this->vehicle_info,
             'repair_type' => $this->repair_type,
+            'work_type' => $this->work_type,
             'workers' => $this->workers,
             'status' => $this->status,
             'description' => $this->description,

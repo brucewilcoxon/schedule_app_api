@@ -55,6 +55,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
             'profile_data' => $user->userProfile
         ]);
 
+        $user->gmail = "gmail";
+
         return response()->json(new UserResource($user));
     });
     Route::get('/profile', function (Request $request) {

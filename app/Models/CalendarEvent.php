@@ -16,6 +16,7 @@ class CalendarEvent extends Model
         'end',
         'vehicle_info',
         'repair_type',
+        'work_type',
         'workers',
         'status',
         'description',
@@ -25,9 +26,54 @@ class CalendarEvent extends Model
     protected $casts = [
         'start' => 'date:Y-m-d',
         'end' => 'date:Y-m-d',
-        'workers' => 'array',
         'is_delayed' => 'boolean'
     ];
+
+    /**
+     * Get the repair_type attribute with proper JSON encoding for Japanese characters.
+     */
+    public function getRepairTypeAttribute($value)
+    {
+        if (is_string($value)) {
+            return json_decode($value, true);
+        }
+        return $value;
+    }
+
+    /**
+     * Set the repair_type attribute with proper JSON encoding for Japanese characters.
+     */
+    public function setRepairTypeAttribute($value)
+    {
+        if (is_array($value)) {
+            $this->attributes['repair_type'] = json_encode($value, JSON_UNESCAPED_UNICODE);
+        } else {
+            $this->attributes['repair_type'] = $value;
+        }
+    }
+
+    /**
+     * Get the workers attribute with proper JSON decoding for Japanese characters.
+     */
+    public function getWorkersAttribute($value)
+    {
+        if (is_string($value)) {
+            return json_decode($value, true);
+        }
+        return $value;
+    }
+
+    /**
+     * Set the workers attribute with proper JSON encoding for Japanese characters.
+     */
+    public function setWorkersAttribute($value)
+    {
+        if (is_array($value)) {
+            $this->attributes['workers'] = json_encode($value, JSON_UNESCAPED_UNICODE);
+        } else {
+            $this->attributes['workers'] = $value;
+        }
+    }
 
     public function user()
     {

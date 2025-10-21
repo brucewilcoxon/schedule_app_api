@@ -40,8 +40,12 @@ class GasController extends Controller
             'recovery' => $gasData->where('process', 'recovery')->sum('quantity'),
             'filling' => $gasData->where('process', 'filling')->sum('quantity'),
             'refilling' => $gasData->where('process', 'refilling')->sum('quantity'),
+            'recovery_refilling' => $gasData->where('process', 'recovery_refilling')->sum('quantity'),
+            'recovery_disposal' => $gasData->where('process', 'recovery_disposal')->sum('quantity'),
+            'recovery_impossible' => $gasData->where('process', 'recovery_impossible')->sum('quantity'),
         ];
-        $summary['total'] = $summary['recovery'] + $summary['filling'] + $summary['refilling'];
+        $summary['total'] = $summary['recovery'] + $summary['filling'] + $summary['refilling'] + 
+                           $summary['recovery_refilling'] + $summary['recovery_disposal'] + $summary['recovery_impossible'];
 
         // Group by date
         $dailyData = $gasData->groupBy(function ($item) {
@@ -71,7 +75,7 @@ class GasController extends Controller
             'quantity' => 'required|numeric|min:0',
             'date' => 'required|date',
             'prefecture' => 'required|string|max:255',
-            'process' => 'required|in:recovery,filling,refilling',
+            'process' => 'required|in:recovery,filling,refilling,recovery_refilling,recovery_disposal,recovery_impossible',
         ]);
 
         $gas = Gas::create($validated);
@@ -97,7 +101,7 @@ class GasController extends Controller
             'quantity' => 'sometimes|required|numeric|min:0',
             'date' => 'sometimes|required|date',
             'prefecture' => 'sometimes|required|string|max:255',
-            'process' => 'sometimes|required|in:recovery,filling,refilling',
+            'process' => 'sometimes|required|in:recovery,filling,refilling,recovery_refilling,recovery_disposal,recovery_impossible',
         ]);
 
         $gas->update($validated);

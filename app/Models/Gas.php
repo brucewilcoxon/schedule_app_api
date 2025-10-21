@@ -33,6 +33,9 @@ class Gas extends Model
             'recovery' => '回収',
             'filling' => '充填',
             'refilling' => '再充填',
+            'recovery_refilling' => '回収/再充填',
+            'recovery_disposal' => '回収/廃棄',
+            'recovery_impossible' => '回収不可',
             default => $this->process,
         };
     }
