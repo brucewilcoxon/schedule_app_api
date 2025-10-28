@@ -13,12 +13,12 @@ class RefrigerantGWPSeeder extends Seeder
     public function run(): void
     {
         $refrigerants = [
-            ['name' => 'R134a HFC', 'gwp_value' => 1300],
-            ['name' => 'R404a HFC', 'gwp_value' => 3940],
-            ['name' => 'R22 HCFC', 'gwp_value' => 1760],
-            ['name' => 'R403B HFC', 'gwp_value' => 3680],
-            ['name' => 'R502 CFC', 'gwp_value' => 4660],
-            ['name' => 'R12 CFC', 'gwp_value' => 1810],
+            ['name' => 'R452A', 'gwp_value' => 2140],
+            ['name' => 'R513a', 'gwp_value' => 631],
+            ['name' => 'R32 (HFO)', 'gwp_value' => 675],
+            ['name' => 'R410A', 'gwp_value' => 2088],
+            ['name' => 'R408A', 'gwp_value' => 3150],
+            ['name' => 'R407C (HFC)', 'gwp_value' => 1774],
         ];
 
         foreach ($refrigerants as $refrigerant) {
