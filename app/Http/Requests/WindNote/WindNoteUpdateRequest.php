@@ -33,6 +33,15 @@ class WindNoteUpdateRequest extends FormRequest
             'date' => [
                 'required',
                 'date',
+            ],
+            'images' => [
+                'nullable',
+                'array',
+                'max:10'
+            ],
+            'images.*' => [
+                'string',
+                'max:255'
             ]
         ];
     }

@@ -28,6 +28,7 @@ class CalendarEventResource extends JsonResource
             'status' => $this->status,
             'description' => $this->description,
             'is_delayed' => $this->is_delayed,
+            'images' => $this->images ?? [],
             'created_at' => $this->created_at ? Carbon::parse($this->created_at)->format('Y-m-d H:i:s') : null,
             'user' => new UserResource($this->whenLoaded('user')),
         ];    

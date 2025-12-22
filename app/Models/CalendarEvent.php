@@ -20,13 +20,15 @@ class CalendarEvent extends Model
         'workers',
         'status',
         'description',
-        'is_delayed'
+        'is_delayed',
+        'images'
     ];
 
     protected $casts = [
         'start' => 'date:Y-m-d',
         'end' => 'date:Y-m-d',
-        'is_delayed' => 'boolean'
+        'is_delayed' => 'boolean',
+        'images' => 'array'
     ];
 
     /**

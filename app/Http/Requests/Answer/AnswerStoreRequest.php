@@ -29,6 +29,15 @@ class AnswerStoreRequest extends FormRequest
             'question_id' => [
                 'required',
                 'integer'
+            ],
+            'images' => [
+                'nullable',
+                'array',
+                'max:10'
+            ],
+            'images.*' => [
+                'string',
+                'max:255'
             ]
         ];
     }

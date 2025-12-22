@@ -26,6 +26,15 @@ class AnswerUpdateRequest extends FormRequest
                 'required',
                 'string'
             ],
+            'images' => [
+                'nullable',
+                'array',
+                'max:10'
+            ],
+            'images.*' => [
+                'string',
+                'max:255'
+            ]
         ];
     }
 }

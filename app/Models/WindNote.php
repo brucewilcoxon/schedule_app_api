@@ -14,7 +14,12 @@ class WindNote extends Model
         'title',
         'content',
         'date',
-        'created_at'
+        'created_at',
+        'images'
+    ];
+
+    protected $casts = [
+        'images' => 'array'
     ];
 
     public function user()

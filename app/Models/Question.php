@@ -12,7 +12,12 @@ class Question extends Model
     protected $fillable = [
         'user_id',
         'content',
-        'created_at'
+        'created_at',
+        'images'
+    ];
+
+    protected $casts = [
+        'images' => 'array'
     ];
 
     public function answers()

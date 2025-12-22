@@ -39,7 +39,7 @@ class CalendarEventStoreRequest extends FormRequest
             'repair_type' => [
                 'nullable',
                 'array',
-                'max:3'
+                'max:7'
             ],
             'repair_type.*' => [
                 'string',
@@ -72,6 +72,15 @@ class CalendarEventStoreRequest extends FormRequest
             'is_delayed' => [
                 'nullable',
                 'boolean'
+            ],
+            'images' => [
+                'nullable',
+                'array',
+                'max:10'
+            ],
+            'images.*' => [
+                'string',
+                'max:255'
             ]
         ];
     }

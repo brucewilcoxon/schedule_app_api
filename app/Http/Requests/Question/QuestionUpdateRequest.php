@@ -25,6 +25,15 @@ class QuestionUpdateRequest extends FormRequest
             'content' => [
                 'required',
                 'string'
+            ],
+            'images' => [
+                'nullable',
+                'array',
+                'max:10'
+            ],
+            'images.*' => [
+                'string',
+                'max:255'
             ]
         ];
     }

@@ -18,6 +18,7 @@ class QuestionResource extends JsonResource
             'id' => $this->id,
             'user' => new UserResource($this->whenLoaded('user')),
             'content' => $this->content,
+            'images' => $this->images ?? [],
             'created_at' => $this->created_at->timezone('Asia/Tokyo')->toIso8601String(),
             'answers' => AnswerResource::collection($this->whenLoaded('answers')),
         ];

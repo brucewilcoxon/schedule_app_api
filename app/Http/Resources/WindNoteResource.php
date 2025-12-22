@@ -20,6 +20,7 @@ class WindNoteResource extends JsonResource
             'title' => $this->title,
             'content' => $this->content,
             'date' => $this->date,
+            'images' => $this->images ?? [],
             'created_at' => $this->created_at->timezone('Asia/Tokyo')->toIso8601String(),
             'is_favorited' => $this->is_favorited > 0,
             'favorites_count' => $this->favorites_count,

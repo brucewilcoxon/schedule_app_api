@@ -15,6 +15,8 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WindNoteController;
 use App\Http\Controllers\RefrigerantWorkplaceController;
 use App\Http\Controllers\GasController;
+use App\Http\Controllers\RepairTypeOptionController;
+use App\Http\Controllers\ImageUploadController;
 use App\Http\Resources\UserResource;
 use App\Models\IntraClaim;
 use Illuminate\Http\Request;
@@ -46,18 +48,32 @@ Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 // 認証必要ルート
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', function (Request $request) {
-        $user = $request->user()->load('userProfile');
+        try {
+            $user = $request->user();
+            
+            if (!$user) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+            
+            $user->load('userProfile');
 
-        \Log::info('API /user endpoint called:', [
-            'user_id' => $user->id,
-            'email' => $user->email,
-            'has_profile' => $user->userProfile ? 'yes' : 'no',
-            'profile_data' => $user->userProfile
-        ]);
+            \Log::info('API /user endpoint called:', [
+                'user_id' => $user->id,
+                'email' => $user->email,
+                'has_profile' => $user->userProfile ? 'yes' : 'no',
+                'profile_data' => $user->userProfile
+            ]);
 
-        $user->gmail = "gmail";
+            $user->gmail = "gmail";
 
-        return response()->json(new UserResource($user));
+            return response()->json(new UserResource($user));
+        } catch (\Exception $e) {
+            \Log::error('API /user endpoint error:', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            return response()->json(['error' => 'Failed to fetch user data'], 500);
+        }
     });
     Route::get('/profile', function (Request $request) {
         $user = $request->user()->load('userProfile');
@@ -66,6 +82,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/profile', [UserProfileController::class, 'store'])->name('profile.update');
     Route::post('/profile/upload-image', [UserProfileController::class, 'uploadImage'])->name('profile.uploadImage');
+    Route::post('/upload-image', [ImageUploadController::class, 'uploadImage'])->name('upload.image');
 
     // Manager-only routes for user management
     Route::middleware(['role:manager'])->group(function () {
@@ -132,6 +149,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/refrigerant-workplaces/{id}', [RefrigerantWorkplaceController::class, 'update'])->name('refrigerant-workplaces.update');
     Route::delete('/refrigerant-workplaces/{id}', [RefrigerantWorkplaceController::class, 'destroy'])->name('refrigerant-workplaces.destroy');
 
-    // Gas Management routes (kept empty here; public routes declared above for demo)
+    // Repair Type Options routes
+    Route::get('/repair-type-options', [RepairTypeOptionController::class, 'index'])->name('repair-type-options.index');
+    Route::post('/repair-type-options', [RepairTypeOptionController::class, 'store'])->name('repair-type-options.store');
+    Route::put('/repair-type-options/{id}', [RepairTypeOptionController::class, 'update'])->name('repair-type-options.update');
+    Route::delete('/repair-type-options/{id}', [RepairTypeOptionController::class, 'destroy'])->name('repair-type-options.destroy');
+
+        // Gas Management routes (kept empty here; public routes declared above for demo)
 });
 
