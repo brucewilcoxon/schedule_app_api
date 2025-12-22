@@ -23,4 +23,4 @@ class RefrigerantCompanyUpdateRequest extends FormRequest
             'residence' => 'nullable|string|max:255',
         ];
     }
-} 
+}

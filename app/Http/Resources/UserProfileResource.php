@@ -21,6 +21,6 @@ class UserProfileResource extends JsonResource
             'age' => $this->age ?? null,
             'introduction' => $this->introduction ?? null,
             'profile_image' => $this->profile_image ?? null,
-        ];    
+        ];
     }
 }

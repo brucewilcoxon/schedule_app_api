@@ -13,7 +13,7 @@ class UserUpdateAction
     public function __invoke(UserUpdateRequest $request, $id)
     {
         $user = User::findOrFail($id);
-        
+
         $userData = [
             'email' => $request->email,
         ];
@@ -43,4 +43,4 @@ class UserUpdateAction
 
         return response()->json(new UserResource($user));
     }
-} 
+}

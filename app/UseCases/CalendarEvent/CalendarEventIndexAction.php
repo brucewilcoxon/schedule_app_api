@@ -12,6 +12,6 @@ class CalendarEventIndexAction
     {
         $calendarEvent = CalendarEvent::with('user.userProfile')->get();
 
-         return response()->json(CalendarEventResource::collection($calendarEvent));
+        return response()->json(CalendarEventResource::collection($calendarEvent));
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,11 +17,12 @@ class UserProfileFactory extends Factory
     public function definition(): array
     {
         $firstNumber = $this->faker->numberBetween(20, 49);
+
         return [
             'name' => $this->faker->realText(rand(10, 12)),
             'gender' => $this->faker->randomElement(['male', 'female']),
             'age' => "{$firstNumber}",
-            'introduction' => $this->faker->realText(rand(10, 20))
+            'introduction' => $this->faker->realText(rand(10, 20)),
         ];
     }
 }

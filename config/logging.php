@@ -58,15 +58,15 @@ return [
             'ignore_exceptions' => false,
         ],
         'vercel' => [
-    'driver' => 'monolog',
-    'level' => env('LOG_LEVEL', 'debug'),
-    'handler' => StreamHandler::class,
-    'formatter' => \Monolog\Formatter\JsonFormatter::class,
-    'with' => [
-        'stream' => 'php://stderr',
-    ],
-    'processors' => [PsrLogMessageProcessor::class],
-],
+            'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'handler' => StreamHandler::class,
+            'formatter' => \Monolog\Formatter\JsonFormatter::class,
+            'with' => [
+                'stream' => 'php://stderr',
+            ],
+            'processors' => [PsrLogMessageProcessor::class],
+        ],
 
         'single' => [
             'driver' => 'single',
@@ -99,7 +99,7 @@ return [
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
-                'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
+                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
             ],
             'processors' => [PsrLogMessageProcessor::class],
         ],

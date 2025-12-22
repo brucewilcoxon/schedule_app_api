@@ -4,7 +4,6 @@ namespace Tests\Feature\WindNote;
 
 use App\Models\WindNote;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class WindNoteUpdateTest extends TestCase

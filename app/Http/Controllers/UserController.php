@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UserDeleteRequest;
 use App\Http\Requests\User\UserIndexRequest;
 use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Requests\User\UserUpdateRequest;
-use App\Http\Requests\User\UserDeleteRequest;
+use App\UseCases\User\UserDeleteAction;
 use App\UseCases\User\UserGradeFilterAction;
 use App\UseCases\User\UserIndexAction;
 use App\UseCases\User\UserStoreAction;
 use App\UseCases\User\UserUpdateAction;
-use App\UseCases\User\UserDeleteAction;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {

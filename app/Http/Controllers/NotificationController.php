@@ -7,7 +7,6 @@ use App\Http\Requests\Notification\NotificationReadAllRequest;
 use App\UseCases\Notification\NotificationIndexAction;
 use App\UseCases\Notification\NotificationReadAction;
 use App\UseCases\Notification\NotificationReadAllAction;
-use Illuminate\Http\Request;
 use Illuminate\Notifications\DatabaseNotification;
 
 class NotificationController extends Controller

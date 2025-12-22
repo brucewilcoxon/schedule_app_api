@@ -4,15 +4,17 @@ namespace App\Notifications;
 
 use App\Http\Resources\IntraClaimResource;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class IntraClaimNotification extends Notification
 {
     use Queueable;
 
     protected $intraClaim;
+
     protected $comment;
+
     protected $type;
 
     public function __construct($intraClaim, $comment, $type = null)
@@ -32,7 +34,7 @@ class IntraClaimNotification extends Notification
         return [
             'intraClaim' => new IntraClaimResource($this->intraClaim),
             'comment' => $this->comment,
-            'type' => $this->type
+            'type' => $this->type,
         ];
     }
 
@@ -49,7 +51,7 @@ class IntraClaimNotification extends Notification
             ->subject($subject)
             ->markdown('mail.notification', [
                 'comment' => $this->comment,
-                'url' => '' // 必要に応じて追加
+                'url' => '', // 必要に応じて追加
             ]);
-        }
+    }
 }

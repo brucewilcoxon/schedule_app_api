@@ -73,7 +73,6 @@ class User extends Authenticatable
         return $this->hasMany(NoteFavorite::class);
     }
 
-
     public function claims()
     {
         return $this->hasMany(IntraClaim::class, 'user_id');

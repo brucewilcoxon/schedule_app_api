@@ -13,30 +13,30 @@ return new class extends Migration
     {
         Schema::table('calendar_events', function (Blueprint $table) {
             // Add new fields for the calendar event form only if they don't exist
-            if (!Schema::hasColumn('calendar_events', 'vehicle_info')) {
+            if (! Schema::hasColumn('calendar_events', 'vehicle_info')) {
                 $table->string('vehicle_info')->nullable()->comment('車両情報');
             }
-            if (!Schema::hasColumn('calendar_events', 'repair_type')) {
+            if (! Schema::hasColumn('calendar_events', 'repair_type')) {
                 $table->string('repair_type')->nullable()->comment('修理の種類');
             }
-            if (!Schema::hasColumn('calendar_events', 'workers')) {
+            if (! Schema::hasColumn('calendar_events', 'workers')) {
                 $table->json('workers')->nullable()->comment('作業員 (JSON array of worker names)');
             }
-            if (!Schema::hasColumn('calendar_events', 'status')) {
+            if (! Schema::hasColumn('calendar_events', 'status')) {
                 $table->enum('status', ['未開始', '作業中', '見積り保留中', '部品待ち保留中', '完了', '連絡済み'])->default('未開始')->comment('ステータス');
             }
-            if (!Schema::hasColumn('calendar_events', 'description')) {
+            if (! Schema::hasColumn('calendar_events', 'description')) {
                 $table->text('description')->nullable()->comment('修理作業の詳細な説明');
             }
-            if (!Schema::hasColumn('calendar_events', 'is_delayed')) {
+            if (! Schema::hasColumn('calendar_events', 'is_delayed')) {
                 $table->boolean('is_delayed')->default(false)->comment('延期されたかどうか');
             }
-            
+
             // Make end date nullable since it's optional in the form
             if (Schema::hasColumn('calendar_events', 'end')) {
                 $table->date('end')->nullable()->change();
             }
-            
+
             // Remove the old is_absent field as it's not used in the new form
             if (Schema::hasColumn('calendar_events', 'is_absent')) {
                 $table->dropColumn('is_absent');
@@ -69,14 +69,14 @@ return new class extends Migration
             if (Schema::hasColumn('calendar_events', 'is_delayed')) {
                 $table->dropColumn('is_delayed');
             }
-            
+
             // Restore end date as required
             if (Schema::hasColumn('calendar_events', 'end')) {
                 $table->date('end')->nullable(false)->change();
             }
-            
+
             // Restore the old is_absent field
-            if (!Schema::hasColumn('calendar_events', 'is_absent')) {
+            if (! Schema::hasColumn('calendar_events', 'is_absent')) {
                 $table->tinyInteger('is_absent')->nullable()->comment('欠席連絡かどうか: 1=欠席, 0=出席');
             }
         });

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\WindNote;
 use App\UseCases\WindNote\NoteFavoriteShowAction;
 use App\UseCases\WindNote\NoteFavoriteUpdateAction;
-use Illuminate\Http\Request;
 
 class NoteFavoriteController extends Controller
 {

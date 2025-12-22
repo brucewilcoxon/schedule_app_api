@@ -26,4 +26,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('refrigerant_gwp_values');
     }
-}; 
+};

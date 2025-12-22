@@ -14,22 +14,21 @@ class RepairTypeOptionDeleteAction
         try {
             $option = RepairTypeOption::findOrFail($id);
             $option->delete();
-            
+
             return response()->json([
                 'message' => '修理の種類が正常に削除されました',
-                'success' => true
+                'success' => true,
             ]);
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'message' => '修理の種類が見つかりません',
-                'success' => false
+                'success' => false,
             ], 404);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => '修理の種類の削除に失敗しました: ' . $e->getMessage(),
-                'success' => false
+                'message' => '修理の種類の削除に失敗しました: '.$e->getMessage(),
+                'success' => false,
             ], 500);
         }
     }
 }
-

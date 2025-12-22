@@ -14,11 +14,11 @@ class Answer extends Model
         'content',
         'question_id',
         'created_at',
-        'images'
+        'images',
     ];
 
     protected $casts = [
-        'images' => 'array'
+        'images' => 'array',
     ];
 
     public function question()

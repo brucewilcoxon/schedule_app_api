@@ -2,12 +2,11 @@
 
 namespace App\UseCases\CalendarEvent;
 
-use App\Http\Requests\CalendarEvent\CalendarEventDeleteRequest;
 use App\Http\Resources\Common\SuccessResource;
 use App\Models\CalendarEvent;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use App\Notifications\CalendarEventNotification;
+use Illuminate\Support\Facades\Auth;
 
 class CalendarEventDeleteAction
 {
@@ -16,7 +15,7 @@ class CalendarEventDeleteAction
         $user = Auth::user();
 
         // Allow managers to delete any event, or allow users to delete their own events
-        if (!$user->isManager() && $user->id !== $calendarEvent->user_id) {
+        if (! $user->isManager() && $user->id !== $calendarEvent->user_id) {
             return response()->json([
                 'message' => '削除する権限がありません',
             ], 403);

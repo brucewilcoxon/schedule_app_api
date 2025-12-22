@@ -22,7 +22,7 @@ class IntraApproveClaimRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+
         ];
     }
 }

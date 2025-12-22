@@ -17,6 +17,7 @@ class WindNoteFactory extends Factory
     public function definition(): array
     {
         $date = $this->faker->dateTimeBetween('now', '+30 days')->format('Y-m-d');
+
         return [
             'title' => $this->faker->realText(rand(15, 20)),
             'content' => $this->faker->realText(rand(20, 30)),

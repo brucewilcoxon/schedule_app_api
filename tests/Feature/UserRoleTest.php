@@ -2,11 +2,10 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\User;
-use App\Models\UserProfile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Tests\TestCase;
 
 class UserRoleTest extends TestCase
 {
@@ -21,7 +20,7 @@ class UserRoleTest extends TestCase
             'name' => 'Test Manager',
             'gender' => 'male',
             'age' => '30',
-            'introduction' => 'Test introduction'
+            'introduction' => 'Test introduction',
         ];
 
         $response = $this->postJson('/api/users', $userData);
@@ -30,13 +29,13 @@ class UserRoleTest extends TestCase
         $response->assertJson([
             'data' => [
                 'email' => 'manager@test.com',
-                'role' => 'manager'
-            ]
+                'role' => 'manager',
+            ],
         ]);
 
         $this->assertDatabaseHas('users', [
             'email' => 'manager@test.com',
-            'role' => 'manager'
+            'role' => 'manager',
         ]);
     }
 
@@ -49,7 +48,7 @@ class UserRoleTest extends TestCase
             'name' => 'Test Worker',
             'gender' => 'female',
             'age' => '25',
-            'introduction' => 'Test introduction'
+            'introduction' => 'Test introduction',
         ];
 
         $response = $this->postJson('/api/users', $userData);
@@ -58,13 +57,13 @@ class UserRoleTest extends TestCase
         $response->assertJson([
             'data' => [
                 'email' => 'worker@test.com',
-                'role' => 'worker'
-            ]
+                'role' => 'worker',
+            ],
         ]);
 
         $this->assertDatabaseHas('users', [
             'email' => 'worker@test.com',
-            'role' => 'worker'
+            'role' => 'worker',
         ]);
     }
 
@@ -77,7 +76,7 @@ class UserRoleTest extends TestCase
             'name' => 'Test User',
             'gender' => 'male',
             'age' => '30',
-            'introduction' => 'Test introduction'
+            'introduction' => 'Test introduction',
         ];
 
         $response = $this->postJson('/api/users', $userData);
@@ -91,13 +90,13 @@ class UserRoleTest extends TestCase
         $manager = User::create([
             'email' => 'manager@test.com',
             'role' => 'manager',
-            'password' => Hash::make('password123')
+            'password' => Hash::make('password123'),
         ]);
 
         $worker = User::create([
             'email' => 'worker@test.com',
             'role' => 'worker',
-            'password' => Hash::make('password123')
+            'password' => Hash::make('password123'),
         ]);
 
         $this->assertTrue($manager->isManager());
@@ -112,8 +111,8 @@ class UserRoleTest extends TestCase
     public function test_available_roles_are_correct()
     {
         $availableRoles = User::getAvailableRoles();
-        
+
         $this->assertEquals(['manager', 'worker'], $availableRoles);
         $this->assertCount(2, $availableRoles);
     }
-} 
+}

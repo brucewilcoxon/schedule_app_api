@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CalendarEvent extends Model
 {
@@ -21,14 +20,14 @@ class CalendarEvent extends Model
         'status',
         'description',
         'is_delayed',
-        'images'
+        'images',
     ];
 
     protected $casts = [
         'start' => 'date:Y-m-d',
         'end' => 'date:Y-m-d',
         'is_delayed' => 'boolean',
-        'images' => 'array'
+        'images' => 'array',
     ];
 
     /**
@@ -39,6 +38,7 @@ class CalendarEvent extends Model
         if (is_string($value)) {
             return json_decode($value, true);
         }
+
         return $value;
     }
 
@@ -62,6 +62,7 @@ class CalendarEvent extends Model
         if (is_string($value)) {
             return json_decode($value, true);
         }
+
         return $value;
     }
 

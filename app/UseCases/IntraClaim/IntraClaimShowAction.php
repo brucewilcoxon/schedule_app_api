@@ -8,9 +8,10 @@ use App\Models\IntraClaim;
 
 class IntraClaimShowAction
 {
-    public function __invoke(IntraClaim $intraClaim ,IntraClaimShowRequest $request)
+    public function __invoke(IntraClaim $intraClaim, IntraClaimShowRequest $request)
     {
         $intraClaim->load(['user.userProfile', 'intraUser.userProfile']);
+
         return response()->json(new IntraClaimResource(($intraClaim)));
     }
 }

@@ -13,21 +13,21 @@ class UserIndexAction
     {
         try {
             $users = User::with('userProfile')->get();
-            
+
             // Filter out users that might cause issues
             $validUsers = $users->filter(function ($user) {
                 return $user->id && $user->email;
             });
-            
+
             return response()->json(UserResource::collection($validUsers));
         } catch (\Exception $e) {
-            Log::error('Error in UserIndexAction: ' . $e->getMessage(), [
-                'trace' => $e->getTraceAsString()
+            Log::error('Error in UserIndexAction: '.$e->getMessage(), [
+                'trace' => $e->getTraceAsString(),
             ]);
-            
+
             return response()->json([
                 'error' => 'Failed to retrieve users',
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ], 500);
         }
     }

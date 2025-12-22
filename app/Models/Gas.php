@@ -29,7 +29,7 @@ class Gas extends Model
      */
     public function getProcessLabelAttribute(): string
     {
-        return match($this->process) {
+        return match ($this->process) {
             'recovery' => '回収',
             'filling' => '充填',
             'refilling' => '再充填',
@@ -51,6 +51,7 @@ class Gas extends Model
         if ($endDate) {
             $query->where('date', '<=', $endDate);
         }
+
         return $query;
     }
 
@@ -62,6 +63,7 @@ class Gas extends Model
         if ($gasType && $gasType !== 'all') {
             $query->where('gas_type', $gasType);
         }
+
         return $query;
     }
 
@@ -73,6 +75,7 @@ class Gas extends Model
         if ($prefecture && $prefecture !== 'all') {
             $query->where('prefecture', $prefecture);
         }
+
         return $query;
     }
 
@@ -84,6 +87,7 @@ class Gas extends Model
         if ($process && $process !== 'all') {
             $query->where('process', $process);
         }
+
         return $query;
     }
 }

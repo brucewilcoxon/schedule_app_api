@@ -5,7 +5,6 @@ namespace Tests\Feature\CalendarEvent;
 use App\Models\CalendarEvent;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CalendarEventUpdateTest extends TestCase
@@ -25,14 +24,14 @@ class CalendarEventUpdateTest extends TestCase
             'workers' => ['田中太郎', '佐藤次郎'],
             'status' => '作業中',
             'description' => 'Updated description',
-            'is_delayed' => false
+            'is_delayed' => false,
         ]);
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('calendar_events', [
             'id' => $calendarEvent->id,
             'vehicle_info' => 'Updated Vehicle Info',
-            'status' => '作業中'
+            'status' => '作業中',
         ]);
     }
 
@@ -50,14 +49,14 @@ class CalendarEventUpdateTest extends TestCase
             'workers' => ['田中太郎', '佐藤次郎'],
             'status' => '完了',
             'description' => 'Manager updated description',
-            'is_delayed' => false
+            'is_delayed' => false,
         ]);
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('calendar_events', [
             'id' => $calendarEvent->id,
             'vehicle_info' => 'Manager Updated Vehicle Info',
-            'status' => '完了'
+            'status' => '完了',
         ]);
     }
 
@@ -75,12 +74,12 @@ class CalendarEventUpdateTest extends TestCase
             'workers' => ['田中太郎', '佐藤次郎'],
             'status' => '作業中',
             'description' => 'Unauthorized description',
-            'is_delayed' => false
+            'is_delayed' => false,
         ]);
 
         $response->assertStatus(403);
         $response->assertJson([
-            'message' => 'イベントの編集をする権限がありません'
+            'message' => 'イベントの編集をする権限がありません',
         ]);
     }
 }

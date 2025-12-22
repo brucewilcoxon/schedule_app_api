@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('calendar_events', function (Blueprint $table) {
-            if (!Schema::hasColumn('calendar_events', 'images')) {
+            if (! Schema::hasColumn('calendar_events', 'images')) {
                 if (Schema::hasColumn('calendar_events', 'description')) {
                     $table->json('images')->nullable()->after('description')->comment('画像パスの配列');
                 } else {
@@ -34,5 +34,3 @@ return new class extends Migration
         });
     }
 };
-
-

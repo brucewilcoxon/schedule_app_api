@@ -24,7 +24,7 @@ class WindNoteDeleteRequest extends FormRequest
         return [
             'id' => [
                 'required',
-                'integer'
+                'integer',
             ],
         ];
     }

@@ -2,8 +2,6 @@
 
 namespace Tests\Feature\Answer;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AnswerUpdateTest extends TestCase

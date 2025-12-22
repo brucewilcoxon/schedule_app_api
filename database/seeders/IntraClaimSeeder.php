@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\IntraClaim;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class IntraClaimSeeder extends Seeder
@@ -16,10 +15,10 @@ class IntraClaimSeeder extends Seeder
     {
         $users = User::all();
 
-        for ($i = 0; $i < 5; ++$i) {
+        for ($i = 0; $i < 5; $i++) {
             $authUser = $users->random();
 
-            $user =  User::factory()->create();
+            $user = User::factory()->create();
 
             IntraClaim::factory()->create([
                 'intra_user_id' => $authUser->id,

@@ -14,10 +14,10 @@ class WindNoteUpdateAction
         $user = $request->user();
 
         // Allow managers to edit any note, or users to edit their own notes
-        if (!$user->isManager() && $user->id !== $windNote->user_id) {
+        if (! $user->isManager() && $user->id !== $windNote->user_id) {
             return response()->json([
-                'message' =>  'ノートを編集する権限がありません'
-                ], 403);
+                'message' => 'ノートを編集する権限がありません',
+            ], 403);
         }
 
         $windNote->update($validated);

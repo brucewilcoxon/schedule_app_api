@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gas;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class GasController extends Controller
 {
@@ -44,7 +44,7 @@ class GasController extends Controller
             'recovery_disposal' => $gasData->where('process', 'recovery_disposal')->sum('quantity'),
             'recovery_impossible' => $gasData->where('process', 'recovery_impossible')->sum('quantity'),
         ];
-        $summary['total'] = $summary['recovery'] + $summary['filling'] + $summary['refilling'] + 
+        $summary['total'] = $summary['recovery'] + $summary['filling'] + $summary['refilling'] +
                            $summary['recovery_refilling'] + $summary['recovery_disposal'] + $summary['recovery_impossible'];
 
         // Group by date
@@ -54,14 +54,14 @@ class GasController extends Controller
             return [
                 'date' => $date,
                 'total' => $items->sum('quantity'),
-                'items' => $items->values()
+                'items' => $items->values(),
             ];
         })->values();
 
         return response()->json([
             'data' => $gasData,
             'summary' => $summary,
-            'daily_data' => $dailyData
+            'daily_data' => $dailyData,
         ]);
     }
 
@@ -125,6 +125,7 @@ class GasController extends Controller
     public function getGasTypes(): JsonResponse
     {
         $gasTypes = Gas::distinct()->pluck('gas_type')->filter()->values();
+
         return response()->json($gasTypes);
     }
 
@@ -134,6 +135,7 @@ class GasController extends Controller
     public function getPrefectures(): JsonResponse
     {
         $prefectures = Gas::distinct()->pluck('prefecture')->filter()->values();
+
         return response()->json($prefectures);
     }
 }

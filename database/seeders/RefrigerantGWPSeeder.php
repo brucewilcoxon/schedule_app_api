@@ -28,4 +28,4 @@ class RefrigerantGWPSeeder extends Seeder
             );
         }
     }
-} 
+}

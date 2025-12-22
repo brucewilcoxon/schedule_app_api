@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class AnswerSeeder extends Seeder
@@ -18,7 +17,7 @@ class AnswerSeeder extends Seeder
         $users = User::all();
         $questions = Question::all();
 
-        for ($i = 0; $i < 5; ++$i) {
+        for ($i = 0; $i < 5; $i++) {
             $authUser = $users->random();
             $question = $questions->random();
 

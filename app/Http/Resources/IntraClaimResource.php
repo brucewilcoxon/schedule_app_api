@@ -14,11 +14,11 @@ class IntraClaimResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-      return [
+        return [
             'id' => $this->id,
             'status' => $this->status,
             'user' => new UserResource($this->whenLoaded('user')),
-            'intra_user' => new UserResource($this->whenLoaded('intraUser'))
-      ];
+            'intra_user' => new UserResource($this->whenLoaded('intraUser')),
+        ];
     }
 }

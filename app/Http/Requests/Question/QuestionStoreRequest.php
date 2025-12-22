@@ -29,12 +29,12 @@ class QuestionStoreRequest extends FormRequest
             'images' => [
                 'nullable',
                 'array',
-                'max:10'
+                'max:10',
             ],
             'images.*' => [
                 'string',
-                'max:255'
-            ]
+                'max:255',
+            ],
         ];
     }
 }

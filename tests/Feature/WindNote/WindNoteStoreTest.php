@@ -2,8 +2,6 @@
 
 namespace Tests\Feature\WindNote;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class WindNoteStoreTest extends TestCase
@@ -16,7 +14,7 @@ class WindNoteStoreTest extends TestCase
         $response = $this->postJson('/api/windNote', [
             'title' => '今日の練習',
             'content' => '内容が入ります',
-            'date' => '2023-06-07'
+            'date' => '2023-06-07',
         ]);
 
         $response->assertStatus(200);

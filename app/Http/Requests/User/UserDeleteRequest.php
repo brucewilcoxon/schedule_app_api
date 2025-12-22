@@ -25,4 +25,4 @@ class UserDeleteRequest extends FormRequest
             //
         ];
     }
-} 
+}

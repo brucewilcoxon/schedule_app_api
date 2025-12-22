@@ -3,25 +3,22 @@
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CalendarEventController;
+use App\Http\Controllers\GasController;
+use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\IntraClaimController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NoteFavoriteController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RefrigerantCompanyController;
+use App\Http\Controllers\RefrigerantWorkplaceController;
+use App\Http\Controllers\RepairTypeOptionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WindNoteController;
-use App\Http\Controllers\RefrigerantWorkplaceController;
-use App\Http\Controllers\GasController;
-use App\Http\Controllers\RepairTypeOptionController;
-use App\Http\Controllers\ImageUploadController;
 use App\Http\Resources\UserResource;
-use App\Models\IntraClaim;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,33 +47,35 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', function (Request $request) {
         try {
             $user = $request->user();
-            
-            if (!$user) {
+
+            if (! $user) {
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
-            
+
             $user->load('userProfile');
 
             \Log::info('API /user endpoint called:', [
                 'user_id' => $user->id,
                 'email' => $user->email,
                 'has_profile' => $user->userProfile ? 'yes' : 'no',
-                'profile_data' => $user->userProfile
+                'profile_data' => $user->userProfile,
             ]);
 
-            $user->gmail = "gmail";
+            $user->gmail = 'gmail';
 
             return response()->json(new UserResource($user));
         } catch (\Exception $e) {
             \Log::error('API /user endpoint error:', [
                 'message' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
+                'trace' => $e->getTraceAsString(),
             ]);
+
             return response()->json(['error' => 'Failed to fetch user data'], 500);
         }
     });
     Route::get('/profile', function (Request $request) {
         $user = $request->user()->load('userProfile');
+
         return response()->json($user->userProfile);
     });
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -113,7 +112,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/windNote/{windNote}/favorite', [NoteFavoriteController::class, 'show'])->name('noteFavorite.show');
     Route::put('/windNote/{windNote}/favorite', [NoteFavoriteController::class, 'update'])->name('noteFavorite.update');
-
 
     // 出艇ランキング
     Route::post('/approveClaim/{intraClaim}', [IntraClaimController::class, 'approveClaim'])->name('intraClaim.approveClaim');
@@ -155,6 +153,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/repair-type-options/{id}', [RepairTypeOptionController::class, 'update'])->name('repair-type-options.update');
     Route::delete('/repair-type-options/{id}', [RepairTypeOptionController::class, 'destroy'])->name('repair-type-options.destroy');
 
-        // Gas Management routes (kept empty here; public routes declared above for demo)
+    // Gas Management routes (kept empty here; public routes declared above for demo)
 });
-

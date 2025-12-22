@@ -23,14 +23,14 @@ class NoteFavoriteUpdateAction
             return response()->json([
                 'message' => 'いいねを解除しました',
                 'data' => [
-                    'favorite' => null
+                    'favorite' => null,
                 ],
             ], 200);
         }
 
         $newFavorite = NoteFavorite::create([
             'user_id' => $user->id,
-            'note_id' => $windNote->id
+            'note_id' => $windNote->id,
         ]);
 
         return new SuccessResource('ノートの更新に成功しました');

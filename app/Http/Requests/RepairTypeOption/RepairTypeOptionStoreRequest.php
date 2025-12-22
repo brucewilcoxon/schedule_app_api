@@ -19,14 +19,13 @@ class RepairTypeOptionStoreRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('repair_type_options', 'name')
+                Rule::unique('repair_type_options', 'name'),
             ],
             'order' => [
                 'nullable',
                 'integer',
-                'min:0'
-            ]
+                'min:0',
+            ],
         ];
     }
 }
-

@@ -15,13 +15,13 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        if (!$request->user() || !$request->user()->hasRole($role)) {
+        if (! $request->user() || ! $request->user()->hasRole($role)) {
             return response()->json([
                 'message' => 'Unauthorized. Insufficient role permissions.',
-                'required_role' => $role
+                'required_role' => $role,
             ], 403);
         }
 
         return $next($request);
     }
-} 
+}

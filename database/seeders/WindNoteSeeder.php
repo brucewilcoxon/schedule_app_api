@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\WindNote;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class WindNoteSeeder extends Seeder
@@ -16,7 +15,7 @@ class WindNoteSeeder extends Seeder
     {
         $users = User::all();
 
-        for ($i = 0; $i < 5; ++$i) {
+        for ($i = 0; $i < 5; $i++) {
             $authUser = $users->random();
 
             WindNote::factory()->create([

@@ -17,7 +17,7 @@ class QuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            'content' => $this->faker->realText(rand(10, 20))
+            'content' => $this->faker->realText(rand(10, 20)),
         ];
     }
 }

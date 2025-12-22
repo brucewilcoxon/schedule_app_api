@@ -14,23 +14,22 @@ class RepairTypeOptionUpdateAction
         try {
             $option = RepairTypeOption::findOrFail($id);
             $option->update($request->validated());
-            
+
             return response()->json([
                 'message' => '修理の種類が正常に更新されました',
                 'data' => $option,
-                'success' => true
+                'success' => true,
             ]);
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'message' => '修理の種類が見つかりません',
-                'success' => false
+                'success' => false,
             ], 404);
         } catch (\Exception $e) {
             return response()->json([
-                'message' => '修理の種類の更新に失敗しました: ' . $e->getMessage(),
-                'success' => false
+                'message' => '修理の種類の更新に失敗しました: '.$e->getMessage(),
+                'success' => false,
             ], 500);
         }
     }
 }
-

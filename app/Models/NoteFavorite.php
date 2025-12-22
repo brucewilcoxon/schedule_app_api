@@ -11,13 +11,14 @@ class NoteFavorite extends Model
 
     protected $fillable = [
         'note_id',
-        'user_id'
+        'user_id',
     ];
 
     public function note()
     {
         return $this->belongsTo(WindNote::class);
     }
+
     public function user()
     {
         return $this->belongsTo(User::class);

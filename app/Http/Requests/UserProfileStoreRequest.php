@@ -36,30 +36,30 @@ class UserProfileStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => [
+            'name' => [
                 'string',
                 'nullable',
                 'max:255',
             ],
-            "gender" => [
+            'gender' => [
                 'string',
                 'nullable',
                 'in:male,female,other',
             ],
-            "age" => [
+            'age' => [
                 'string',
                 'nullable',
                 'max:3',
             ],
-            "introduction" => [
+            'introduction' => [
                 'string',
                 'nullable',
                 'max:255',
             ],
-            "profile_image" => [
+            'profile_image' => [
                 'string',
-                'nullable'
-            ]
+                'nullable',
+            ],
         ];
     }
 }

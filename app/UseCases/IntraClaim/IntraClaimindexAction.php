@@ -13,7 +13,7 @@ class IntraClaimindexAction
     {
         $userId = Auth::id();
 
-        $intraClaims = IntraClaim::where(function($query) use ($userId) {
+        $intraClaims = IntraClaim::where(function ($query) use ($userId) {
             $query->where('user_id', $userId)
                 ->orWhere('intra_user_id', $userId);
         })->with(['user.userProfile', 'intraUser.userProfile'])->get();

@@ -26,4 +26,3 @@ class RepairTypeOption extends Model
         return self::orderBy('order')->orderBy('name')->pluck('name')->toArray();
     }
 }
-

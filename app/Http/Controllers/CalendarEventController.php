@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CalendarEvent\CalendarEventDeleteRequest;
 use App\Http\Requests\CalendarEvent\CalendarEventIndexRequest;
 use App\Http\Requests\CalendarEvent\CalendarEventStoreRequest;
 use App\Http\Requests\CalendarEvent\CalendarEventUpdateRequest;
 use App\Models\CalendarEvent;
-use App\Models\WindNote;
 use App\UseCases\CalendarEvent\CalendarEventDeleteAction;
 use App\UseCases\CalendarEvent\CalendarEventIndexAction;
 use App\UseCases\CalendarEvent\CalendarEventStoreAction;

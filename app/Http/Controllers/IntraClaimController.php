@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\IntraClaim\IntraApproveClaimRequest;
-use App\Http\Requests\IntraClaim\IntraClaimCreateRequest;
 use App\Http\Requests\IntraClaim\IntraClaimindexRequest;
 use App\Http\Requests\IntraClaim\IntraClaimShowRequest;
 use App\Http\Requests\IntraClaim\IntraRejectRequest;
 use App\Models\IntraClaim;
 use App\UseCases\IntraClaim\IntraApproveClaimAction;
-use App\UseCases\IntraClaim\IntraClaimCreateAction;
 use App\UseCases\IntraClaim\IntraClaimindexAction;
 use App\UseCases\IntraClaim\IntraClaimShowAction;
 use App\UseCases\IntraClaim\IntraRejectAction;

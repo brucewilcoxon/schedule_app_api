@@ -16,4 +16,3 @@ class RepairTypeOptionIndexRequest extends FormRequest
         return [];
     }
 }
-

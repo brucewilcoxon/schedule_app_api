@@ -21,7 +21,7 @@ class IntraRejectAction
 
         if ($intraUser->id !== $intraClaim->intra_user_id) {
             return response()->json([
-                'message' => '依頼取り下げる権限がありません'
+                'message' => '依頼取り下げる権限がありません',
             ], 403);
         }
 
@@ -29,7 +29,7 @@ class IntraRejectAction
 
         // intraClaimのstatusを更新
         $intraClaim->update(['status' => 'reject']);
-        
+
         $departureUser->notify(new IntraClaimNotification($intraClaim, $comment));
 
         return new SuccessResource('イントラ依頼を取り下げました');

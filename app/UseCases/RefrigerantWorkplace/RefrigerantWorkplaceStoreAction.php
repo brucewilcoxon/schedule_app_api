@@ -11,6 +11,7 @@ class RefrigerantWorkplaceStoreAction
     public function __invoke(RefrigerantWorkplaceStoreRequest $request)
     {
         $item = RefrigerantWorkplace::create($request->validated());
+
         return new RefrigerantWorkplaceResource($item);
     }
 }

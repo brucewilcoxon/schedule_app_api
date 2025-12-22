@@ -12,6 +12,7 @@ class RefrigerantWorkplaceUpdateAction
     {
         $item = RefrigerantWorkplace::findOrFail($id);
         $item->update($request->validated());
+
         return new RefrigerantWorkplaceResource($item);
     }
 }

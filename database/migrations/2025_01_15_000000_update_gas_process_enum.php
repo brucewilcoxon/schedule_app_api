@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -13,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         // First, check if the table exists
-        if (!Schema::hasTable('gas')) {
+        if (! Schema::hasTable('gas')) {
             return;
         }
 
         // Check if the process column exists
-        if (!Schema::hasColumn('gas', 'process')) {
+        if (! Schema::hasColumn('gas', 'process')) {
             return;
         }
 
@@ -34,7 +33,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (!Schema::hasTable('gas') || !Schema::hasColumn('gas', 'process')) {
+        if (! Schema::hasTable('gas') || ! Schema::hasColumn('gas', 'process')) {
             return;
         }
 

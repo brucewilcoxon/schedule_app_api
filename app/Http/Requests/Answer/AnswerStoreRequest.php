@@ -24,21 +24,21 @@ class AnswerStoreRequest extends FormRequest
         return [
             'content' => [
                 'required',
-                'string'
+                'string',
             ],
             'question_id' => [
                 'required',
-                'integer'
+                'integer',
             ],
             'images' => [
                 'nullable',
                 'array',
-                'max:10'
+                'max:10',
             ],
             'images.*' => [
                 'string',
-                'max:255'
-            ]
+                'max:255',
+            ],
         ];
     }
 }

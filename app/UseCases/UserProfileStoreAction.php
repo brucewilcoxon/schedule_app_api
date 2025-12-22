@@ -14,7 +14,7 @@ class UserProfileStoreAction
         $user = Auth::user();
 
         $validated = $request->validated();
-        
+
         UserProfile::updateOrCreate(
             ['user_id' => $user->id],
             $validated

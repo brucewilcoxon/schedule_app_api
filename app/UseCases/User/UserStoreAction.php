@@ -33,4 +33,4 @@ class UserStoreAction
 
         return response()->json(new UserResource($user), 201);
     }
-} 
+}

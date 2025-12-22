@@ -10,7 +10,6 @@ use App\UseCases\Answer\AnswerDeleteAction;
 use App\UseCases\Answer\AnswerIndexAction;
 use App\UseCases\Answer\AnswerStoreAction;
 use App\UseCases\Answer\AnswerUpdateAction;
-use Illuminate\Http\Request;
 
 class AnswerController extends Controller
 {
@@ -18,6 +17,7 @@ class AnswerController extends Controller
     {
         return $action($request);
     }
+
     public function store(AnswerStoreRequest $request, AnswerStoreAction $action)
     {
         return $action($request);
@@ -27,6 +27,7 @@ class AnswerController extends Controller
     {
         return $action($request, $answer);
     }
+
     public function destroy(Answer $answer, AnswerDeleteAction $action)
     {
         return $action($answer);

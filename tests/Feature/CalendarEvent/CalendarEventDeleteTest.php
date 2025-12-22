@@ -5,7 +5,6 @@ namespace Tests\Feature\CalendarEvent;
 use App\Models\CalendarEvent;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CalendarEventDeleteTest extends TestCase
@@ -21,7 +20,7 @@ class CalendarEventDeleteTest extends TestCase
 
         $response->assertStatus(200);
         $this->assertDatabaseMissing('calendar_events', [
-            'id' => $calendarEvent->id
+            'id' => $calendarEvent->id,
         ]);
     }
 
@@ -35,7 +34,7 @@ class CalendarEventDeleteTest extends TestCase
 
         $response->assertStatus(200);
         $this->assertDatabaseMissing('calendar_events', [
-            'id' => $calendarEvent->id
+            'id' => $calendarEvent->id,
         ]);
     }
 
@@ -49,12 +48,12 @@ class CalendarEventDeleteTest extends TestCase
 
         $response->assertStatus(403);
         $response->assertJson([
-            'message' => '削除する権限がありません'
+            'message' => '削除する権限がありません',
         ]);
-        
+
         // Event should still exist
         $this->assertDatabaseHas('calendar_events', [
-            'id' => $calendarEvent->id
+            'id' => $calendarEvent->id,
         ]);
     }
 }

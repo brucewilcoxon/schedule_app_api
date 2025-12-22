@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\UserProfile;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,11 +14,11 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-       $users = User::factory(10)->create();
+        $users = User::factory(10)->create();
 
-       $users->each(function ($user) {
-           UserProfile::factory()->create(['user_id' => $user->id]);
-       });
+        $users->each(function ($user) {
+            UserProfile::factory()->create(['user_id' => $user->id]);
+        });
 
         $specificUser = User::create([
             'email' => 'manager@gmail.com',

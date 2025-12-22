@@ -20,15 +20,17 @@ class Handler extends ExceptionHandler
                         'message' => $exception->getMessage(),
                         'file' => $exception->getFile(),
                         'line' => $exception->getLine(),
-                    ]
-                ]
+                    ],
+                ],
             ];
             // 開発環境の場合はスタックトレースを追加
             if (config('app.debug')) {
                 $response['error']['details']['trace'] = $exception->getTraceAsString();
             }
+
             return response()->json($response, 500);
         }
+
         return parent::render($request, $exception);
     }
 }

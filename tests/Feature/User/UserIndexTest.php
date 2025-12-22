@@ -7,7 +7,6 @@ use Tests\TestCase;
 
 class UserIndexTest extends TestCase
 {
-
     /**
      * A basic feature test example.
      */

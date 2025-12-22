@@ -23,7 +23,7 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         $userId = $this->route('id');
-        
+
         return [
             'email' => [
                 'required',
@@ -41,8 +41,6 @@ class UserUpdateRequest extends FormRequest
 
     /**
      * Get custom messages for validator errors.
-     *
-     * @return array
      */
     public function messages(): array
     {
@@ -58,4 +56,4 @@ class UserUpdateRequest extends FormRequest
             'age.required' => '年齢は必須です。',
         ];
     }
-} 
+}

@@ -9,21 +9,21 @@ use InvalidArgumentException;
 class SuccessResource extends JsonResource
 {
     /**
-    * The "data" wrapper that should be applied.
-    *
-    * @var string|null
-    */
+     * The "data" wrapper that should be applied.
+     *
+     * @var string|null
+     */
     public static $wrap = null;
 
     /**
-    * Create a new resource instance.
-    *
-    * @param  string  $resource レスポンスに含めるメッセージ
-    * @return void
-    */
+     * Create a new resource instance.
+     *
+     * @param  string  $resource  レスポンスに含めるメッセージ
+     * @return void
+     */
     public function __construct($resource)
     {
-        if (!is_string($resource)) {
+        if (! is_string($resource)) {
             throw new InvalidArgumentException('The resource must be a string.');
         }
         parent::__construct($resource);

@@ -5,14 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
-use App\Models\UserProfile;
 use App\UseCases\Auth\LoginAction;
 use App\UseCases\Auth\RegisterAction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -48,13 +44,13 @@ class AuthController extends Controller
 
         $response = response()->json([
             'message' => 'ログアウトしました',
-            'success' => true
+            'success' => true,
         ], Response::HTTP_OK);
 
         // Apply all cookie deletions with different path and domain combinations
         foreach ($cookies as $cookie) {
             $response->withCookie($cookie);
-            
+
             // Also clear with different paths
             $response->withCookie(cookie()->forget($cookie->getName(), '/api'));
             $response->withCookie(cookie()->forget($cookie->getName(), '/sanctum'));

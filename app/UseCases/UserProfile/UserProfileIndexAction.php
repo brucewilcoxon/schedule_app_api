@@ -10,9 +10,9 @@ class UserProfileIndexAction
     public function __invoke(): JsonResponse
     {
         $userProfiles = UserProfile::select('id', 'name')->orderBy('name')->get();
-        
+
         return response()->json([
-            'data' => $userProfiles
+            'data' => $userProfiles,
         ]);
     }
 }

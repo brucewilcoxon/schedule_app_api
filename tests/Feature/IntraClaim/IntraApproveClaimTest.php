@@ -18,7 +18,6 @@ class IntraApproveClaimTest extends TestCase
 
         $otherUser = User::factory()->create();
 
-
         // テスト用の IntraClaim を作成
         $intraClaim = IntraClaim::factory()->create([
             'user_id' => $intraUser->id,

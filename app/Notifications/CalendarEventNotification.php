@@ -2,7 +2,6 @@
 
 namespace App\Notifications;
 
-use App\Http\Resources\CalendarEventResource;
 use App\Models\CalendarEvent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -12,6 +11,7 @@ class CalendarEventNotification extends Notification
     use Queueable;
 
     protected CalendarEvent $calendarEvent;
+
     protected string $type;
 
     public function __construct(CalendarEvent $calendarEvent, string $type)
@@ -47,4 +47,4 @@ class CalendarEventNotification extends Notification
             ],
         ];
     }
-} 
+}

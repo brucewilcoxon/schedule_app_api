@@ -15,4 +15,4 @@ class RefrigerantCompanyDeleteRequest extends FormRequest
     {
         return [];
     }
-} 
+}

@@ -34,7 +34,7 @@ class MakeActionCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/stubs/action.php.stub';
+        return __DIR__.'/stubs/action.php.stub';
     }
 
     /**
@@ -45,7 +45,7 @@ class MakeActionCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\UseCases';
+        return $rootNamespace.'\UseCases';
     }
 
     protected function getRequest(): string

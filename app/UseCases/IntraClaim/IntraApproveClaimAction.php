@@ -22,11 +22,11 @@ class IntraApproveClaimAction
 
         if ($request->user()->id !== $intraClaim->intra_user_id) {
             return response()->json([
-                'message' => 'イントラ依頼を承諾する権限がありません'
+                'message' => 'イントラ依頼を承諾する権限がありません',
             ], 403);
         }
 
-         // intraClaimのstatusを更新
+        // intraClaimのstatusを更新
         $intraClaim->update(['status' => 'approve']);
 
         $comment = "{$intraUserName}さんと{$departureUserName}のイントラが確定しました";

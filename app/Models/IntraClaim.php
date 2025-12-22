@@ -24,5 +24,4 @@ class IntraClaim extends Model
     {
         return $this->belongsTo(User::class, 'intra_user_id');
     }
-
 }

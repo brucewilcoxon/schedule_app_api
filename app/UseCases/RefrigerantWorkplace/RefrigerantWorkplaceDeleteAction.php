@@ -3,8 +3,8 @@
 namespace App\UseCases\RefrigerantWorkplace;
 
 use App\Http\Requests\RefrigerantWorkplace\RefrigerantWorkplaceDeleteRequest;
-use Illuminate\Http\JsonResponse;
 use App\Models\RefrigerantWorkplace;
+use Illuminate\Http\JsonResponse;
 
 class RefrigerantWorkplaceDeleteAction
 {

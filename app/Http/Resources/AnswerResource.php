@@ -19,7 +19,7 @@ class AnswerResource extends JsonResource
             'user' => new UserResource($this->whenLoaded('user')),
             'content' => $this->content,
             'images' => $this->images ?? [],
-            'created_at' =>$this->created_at->timezone('Asia/Tokyo')->toIso8601String(),
+            'created_at' => $this->created_at->timezone('Asia/Tokyo')->toIso8601String(),
             'question' => new QuestionResource($this->whenLoaded('question')),
         ];
     }

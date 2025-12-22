@@ -15,4 +15,4 @@ class RefrigerantCompanyIndexRequest extends FormRequest
     {
         return [];
     }
-} 
+}

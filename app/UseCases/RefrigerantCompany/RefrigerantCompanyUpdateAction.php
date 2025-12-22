@@ -12,7 +12,7 @@ class RefrigerantCompanyUpdateAction
     {
         $company = RefrigerantCompany::findOrFail($id);
         $company->update($request->validated());
-        
+
         return new RefrigerantCompanyResource($company);
     }
-} 
+}

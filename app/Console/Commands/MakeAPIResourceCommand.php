@@ -29,10 +29,7 @@ class MakeAPIResourceCommand extends GenerateApiResourceCommand
      */
     protected $description = 'Create a new api resource';
 
-    /**
-     * @var string
-     */
-    protected string $stub = __DIR__ . '/stubs/api-resource.php.stub';
+    protected string $stub = __DIR__.'/stubs/api-resource.php.stub';
 
     /**
      * @throws BindingResolutionException
@@ -51,9 +48,9 @@ class MakeAPIResourceCommand extends GenerateApiResourceCommand
         array_pop($arguments);
         $dir = implode('\\', $arguments);
         if ($dir !== '') {
-            $dir = '\\' . $dir;
+            $dir = '\\'.$dir;
         }
-        $this->namespace = config('apiresourcegenerator.resources.namespace') . $dir;
+        $this->namespace = config('apiresourcegenerator.resources.namespace').$dir;
 
         $this->getPropertiesFromTable($model);
 
@@ -65,7 +62,8 @@ class MakeAPIResourceCommand extends GenerateApiResourceCommand
         $arguments = explode('/', $this->argument('model'));
         array_pop($arguments);
         $dir = implode('/', $arguments);
-        return config('apiresourcegenerator.resources.dir') . '/' . $dir;
+
+        return config('apiresourcegenerator.resources.dir').'/'.$dir;
     }
 
     /**
@@ -75,7 +73,8 @@ class MakeAPIResourceCommand extends GenerateApiResourceCommand
     {
         $arguments = explode('/', $model);
         $model = array_pop($arguments);
-        return $this->laravel->make(config('apiresourcegenerator.models.namespace') . '\\' . $model);
+
+        return $this->laravel->make(config('apiresourcegenerator.models.namespace').'\\'.$model);
     }
 
     /**
@@ -94,7 +93,7 @@ class MakeAPIResourceCommand extends GenerateApiResourceCommand
         foreach ($properties as $property) {
             $array_key = $property;
 
-            if ('camelCase' === $this->return_case) {
+            if ($this->return_case === 'camelCase') {
                 $array_key = Str::camel($property);
             }
 
@@ -106,15 +105,16 @@ class MakeAPIResourceCommand extends GenerateApiResourceCommand
                 $fields .= "\t\t\t'{$array_key}' => \$this->{$property}";
             }
 
-            ++$count;
+            $count++;
         }
 
         $stub = $this->files->get($this->stub);
 
         $stub = str_replace('{{ docblock }}', $doc_block, $stub);
-        $stub = str_replace('{{ class }}', $name . 'Resource', $stub);
+        $stub = str_replace('{{ class }}', $name.'Resource', $stub);
         $stub = str_replace('{{ namespace }}', $this->namespace, $stub);
         $stub = str_replace('{{ model }}', $model, $stub);
+
         return str_replace('{{ fields }}', $fields, $stub);
     }
 }

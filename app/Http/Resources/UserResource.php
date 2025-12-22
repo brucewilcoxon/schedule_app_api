@@ -18,13 +18,13 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'email' => $this->email,
             'role' => $this->role ?? 'worker',
-            'user_profile' => $this->whenLoaded('userProfile') && $this->userProfile 
-                ? new UserProfileResource($this->userProfile) 
-                : null
+            'user_profile' => $this->whenLoaded('userProfile') && $this->userProfile
+                ? new UserProfileResource($this->userProfile)
+                : null,
         ];
-        
+
         \Log::info('UserResource data:', $data);
-        
+
         return $data;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\WindNote;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,7 +17,7 @@ class NoteFavoriteResource extends JsonResource
         return [
             'id' => $this->id,
             'user' => new UserResource($this->whenLoaded('user')),
-            'note' => new WindNoteResource($this->whenLoaded('note'))
-      ];    
+            'note' => new WindNoteResource($this->whenLoaded('note')),
+        ];
     }
 }

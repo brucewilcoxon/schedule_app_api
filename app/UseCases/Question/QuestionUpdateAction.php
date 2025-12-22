@@ -14,10 +14,10 @@ class QuestionUpdateAction
         $user = $request->user();
 
         // Allow managers to edit any question, or users to edit their own questions
-        if (!$user->isManager() && $user->id !== $question->user_id) {
+        if (! $user->isManager() && $user->id !== $question->user_id) {
             return response()->json(
-                ['error' => '質問を編集する権限がありません'
-            ], 403);
+                ['error' => '質問を編集する権限がありません',
+                ], 403);
         }
 
         $question->update($validated);

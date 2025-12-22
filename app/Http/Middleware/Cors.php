@@ -9,7 +9,7 @@ class Cors
 {
     public function handle(Request $request, Closure $next)
     {
-        if ($request->getMethod() === "OPTIONS") {
+        if ($request->getMethod() === 'OPTIONS') {
             $response = response('', 204);
         } else {
             $response = $next($request);

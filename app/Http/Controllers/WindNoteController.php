@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\WindNote\WindNoteDeleteRequest;
 use App\Http\Requests\WindNote\WindNoteIndexRequest;
 use App\Http\Requests\WindNote\WindNoteShowRequest;
 use App\Http\Requests\WindNote\WindNoteStoreRequest;
@@ -13,7 +12,6 @@ use App\UseCases\WindNote\WindNoteIndexAction;
 use App\UseCases\WindNote\WindNoteShowAction;
 use App\UseCases\WindNote\WindNoteStoreAction;
 use App\UseCases\WindNote\WindNoteUpdateAction;
-use Illuminate\Http\Request;
 
 class WindNoteController extends Controller
 {
@@ -26,6 +24,7 @@ class WindNoteController extends Controller
     {
         return $action($request);
     }
+
     public function show(WindNoteShowRequest $request, WindNote $windNote, WindNoteShowAction $action)
     {
         return $action($request, $windNote);
@@ -35,6 +34,7 @@ class WindNoteController extends Controller
     {
         return $action($request, $windNote);
     }
+
     public function destroy(WindNote $windNote, WindNoteDeleteAction $action)
     {
         return $action($windNote);

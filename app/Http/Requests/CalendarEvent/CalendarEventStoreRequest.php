@@ -24,64 +24,64 @@ class CalendarEventStoreRequest extends FormRequest
         return [
             'start' => [
                 'required',
-                'date'
+                'date',
             ],
             'end' => [
                 'nullable',
                 'date',
-                'after_or_equal:start'
+                'after_or_equal:start',
             ],
             'vehicle_info' => [
                 'nullable',
                 'string',
-                'max:255'
+                'max:255',
             ],
             'repair_type' => [
                 'nullable',
                 'array',
-                'max:7'
+                'max:7',
             ],
             'repair_type.*' => [
                 'string',
-                'max:255'
+                'max:255',
             ],
             'work_type' => [
                 'nullable',
                 'string',
-                'in:入庫作業,出張作業'
+                'in:入庫作業,出張作業',
             ],
             'workers' => [
                 'nullable',
                 'array',
-                'max:3'
+                'max:3',
             ],
             'workers.*' => [
                 'string',
-                'max:255'
+                'max:255',
             ],
             'status' => [
                 'nullable',
                 'string',
-                'in:未開始,作業中,見積り保留中,部品待ち保留中,完了,連絡済み'
+                'in:未開始,作業中,見積り保留中,部品待ち保留中,完了,連絡済み',
             ],
             'description' => [
                 'nullable',
                 'string',
-                'max:1000'
+                'max:1000',
             ],
             'is_delayed' => [
                 'nullable',
-                'boolean'
+                'boolean',
             ],
             'images' => [
                 'nullable',
                 'array',
-                'max:10'
+                'max:10',
             ],
             'images.*' => [
                 'string',
-                'max:255'
-            ]
+                'max:255',
+            ],
         ];
     }
 }

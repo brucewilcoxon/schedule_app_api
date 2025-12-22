@@ -15,7 +15,7 @@ class CalendarEventResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [    
+        return [
             'id' => $this->id,
             'title' => $this->title,
             'content' => $this->content,
@@ -31,6 +31,6 @@ class CalendarEventResource extends JsonResource
             'images' => $this->images ?? [],
             'created_at' => $this->created_at ? Carbon::parse($this->created_at)->format('Y-m-d H:i:s') : null,
             'user' => new UserResource($this->whenLoaded('user')),
-        ];    
+        ];
     }
 }

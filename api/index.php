@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Log;
-
 // 基本的なエラー設定
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -14,11 +12,11 @@ try {
         'headers' => function_exists('getallheaders') ? getallheaders() : [],
         'time' => date('Y-m-d H:i:s'),
     ];
-    
+
     error_log(json_encode([
         'level' => 'info',
         'message' => 'Incoming request',
-        'context' => $requestData
+        'context' => $requestData,
     ]));
 
     require __DIR__.'/../public/index.php';
@@ -41,9 +39,9 @@ try {
             'previous' => $e->getPrevious() ? [
                 'message' => $e->getPrevious()->getMessage(),
                 'file' => $e->getPrevious()->getFile(),
-                'line' => $e->getPrevious()->getLine()
-            ] : null
-        ]
+                'line' => $e->getPrevious()->getLine(),
+            ] : null,
+        ],
     ];
 
     // JSONとしてログ出力
@@ -55,6 +53,6 @@ try {
     echo json_encode([
         'error' => true,
         'message' => 'Internal Server Error',
-        'debug' => $errorData['context']
+        'debug' => $errorData['context'],
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 }

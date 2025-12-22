@@ -29,10 +29,10 @@ return new class extends Migration
     {
         Schema::table('calendar_events', function (Blueprint $table) {
             // Restore title and content columns
-            if (!Schema::hasColumn('calendar_events', 'title')) {
+            if (! Schema::hasColumn('calendar_events', 'title')) {
                 $table->string('title')->comment('イベントタイトル');
             }
-            if (!Schema::hasColumn('calendar_events', 'content')) {
+            if (! Schema::hasColumn('calendar_events', 'content')) {
                 $table->string('content')->nullable(true)->comment('イベント内容');
             }
         });

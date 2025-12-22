@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RefrigerantWorkplace\RefrigerantWorkplaceDeleteRequest;
 use App\Http\Requests\RefrigerantWorkplace\RefrigerantWorkplaceIndexRequest;
 use App\Http\Requests\RefrigerantWorkplace\RefrigerantWorkplaceStoreRequest;
 use App\Http\Requests\RefrigerantWorkplace\RefrigerantWorkplaceUpdateRequest;
-use App\Http\Requests\RefrigerantWorkplace\RefrigerantWorkplaceDeleteRequest;
+use App\UseCases\RefrigerantWorkplace\RefrigerantWorkplaceDeleteAction;
 use App\UseCases\RefrigerantWorkplace\RefrigerantWorkplaceIndexAction;
 use App\UseCases\RefrigerantWorkplace\RefrigerantWorkplaceStoreAction;
 use App\UseCases\RefrigerantWorkplace\RefrigerantWorkplaceUpdateAction;
-use App\UseCases\RefrigerantWorkplace\RefrigerantWorkplaceDeleteAction;
 
 class RefrigerantWorkplaceController extends Controller
 {

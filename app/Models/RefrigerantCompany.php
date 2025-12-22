@@ -51,4 +51,4 @@ class RefrigerantCompany extends Model
     {
         return $this->belongsTo(UserProfile::class, 'manager_id');
     }
-} 
+}

@@ -14,7 +14,7 @@ class AnswerUpdateAction
 
         if ($request->user()->id !== $answer->user_id) {
             return response()->json([
-                'message' => '回答の編集をする権限がありません.'
+                'message' => '回答の編集をする権限がありません.',
             ], 403);
         }
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Question\QuestionDestroyRequest;
 use App\Http\Requests\Question\QuestionIndexRequest;
 use App\Http\Requests\Question\QuestionShowRequest;
 use App\Http\Requests\Question\QuestionStoreRequest;
@@ -13,7 +12,6 @@ use App\UseCases\Question\QuestionIndexAction;
 use App\UseCases\Question\QuestionShowAction;
 use App\UseCases\Question\QuestionStoreAction;
 use App\UseCases\Question\QuestionUpdateAction;
-use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {

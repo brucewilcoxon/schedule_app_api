@@ -16,9 +16,9 @@ class CalendarEventUpdateAction
         $user = $request->user();
 
         // Allow managers to edit any event, or allow users to edit their own events
-        if (!$user->isManager() && $user->id !== $calendarEvent->user_id) {
+        if (! $user->isManager() && $user->id !== $calendarEvent->user_id) {
             return response()->json([
-                'message' => 'イベントの編集をする権限がありません'
+                'message' => 'イベントの編集をする権限がありません',
             ], 403);
         }
 

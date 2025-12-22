@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RefrigerantCompany\RefrigerantCompanyDeleteRequest;
 use App\Http\Requests\RefrigerantCompany\RefrigerantCompanyIndexRequest;
 use App\Http\Requests\RefrigerantCompany\RefrigerantCompanyStoreRequest;
 use App\Http\Requests\RefrigerantCompany\RefrigerantCompanyUpdateRequest;
-use App\Http\Requests\RefrigerantCompany\RefrigerantCompanyDeleteRequest;
+use App\UseCases\RefrigerantCompany\RefrigerantCompanyDeleteAction;
 use App\UseCases\RefrigerantCompany\RefrigerantCompanyIndexAction;
 use App\UseCases\RefrigerantCompany\RefrigerantCompanyStoreAction;
 use App\UseCases\RefrigerantCompany\RefrigerantCompanyUpdateAction;
-use App\UseCases\RefrigerantCompany\RefrigerantCompanyDeleteAction;
 
 class RefrigerantCompanyController extends Controller
 {
@@ -32,4 +32,4 @@ class RefrigerantCompanyController extends Controller
     {
         return $action($request, $id);
     }
-} 
+}

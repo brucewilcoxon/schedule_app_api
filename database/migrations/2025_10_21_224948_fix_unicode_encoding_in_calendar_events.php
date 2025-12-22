@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
@@ -14,10 +12,10 @@ return new class extends Migration
     {
         // Fix existing calendar events with Unicode escape sequences
         $calendarEvents = DB::table('calendar_events')->get();
-        
+
         foreach ($calendarEvents as $event) {
             $updates = [];
-            
+
             // Fix repair_type field
             if ($event->repair_type) {
                 $repairType = $event->repair_type;
@@ -30,7 +28,7 @@ return new class extends Migration
                     }
                 }
             }
-            
+
             // Fix workers field
             if ($event->workers) {
                 $workers = $event->workers;
@@ -43,9 +41,9 @@ return new class extends Migration
                     }
                 }
             }
-            
+
             // Update the record if there are changes
-            if (!empty($updates)) {
+            if (! empty($updates)) {
                 DB::table('calendar_events')
                     ->where('id', $event->id)
                     ->update($updates);

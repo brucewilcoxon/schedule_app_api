@@ -29,4 +29,4 @@ class RefrigerantCompanyResource extends JsonResource
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
         ];
     }
-} 
+}
