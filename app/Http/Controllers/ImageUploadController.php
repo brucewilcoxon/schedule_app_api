@@ -112,17 +112,36 @@ class ImageUploadController extends Controller
                 'message' => 'Image uploaded successfully',
             ]);
         } catch (\Exception $e) {
-            Log::error('Image upload failed', [
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine(),
-            ]);
+            $errorMessage = $e->getMessage();
+            $isTimeout = false;
+            
+            // Detect timeout-related errors
+            if (str_contains($errorMessage, 'timeout') || 
+                str_contains($errorMessage, 'Maximum execution time') ||
+                str_contains($errorMessage, 'exceeded') ||
+                $e->getCode() === 504) {
+                $isTimeout = true;
+                Log::error('Image upload timeout', [
+                    'error' => $errorMessage,
+                    'user_id' => auth()->id(),
+                    'php_max_execution_time' => ini_get('max_execution_time'),
+                    'php_max_input_time' => ini_get('max_input_time'),
+                ]);
+            } else {
+                Log::error('Image upload failed', [
+                    'error' => $errorMessage,
+                    'trace' => $e->getTraceAsString(),
+                    'file' => $e->getFile(),
+                    'line' => $e->getLine(),
+                ]);
+            }
 
             return response()->json([
-                'error' => 'Upload failed',
-                'message' => $e->getMessage(),
-            ], 500);
+                'error' => $isTimeout ? 'Upload timeout' : 'Upload failed',
+                'message' => $isTimeout 
+                    ? 'アップロードがタイムアウトしました。ファイルサイズが大きすぎるか、サーバーの設定を確認してください。'
+                    : $errorMessage,
+            ], $isTimeout ? 504 : 500);
         }
     }
 
