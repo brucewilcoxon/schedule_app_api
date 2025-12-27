@@ -52,25 +52,39 @@ Route::middleware(['auth:sanctum'])->group(function () {
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
 
-            $user->load('userProfile');
+            // Safely load userProfile - handle case where relationship might not exist
+            try {
+                $user->load('userProfile');
+            } catch (\Exception $e) {
+                \Log::warning('Failed to load userProfile:', [
+                    'user_id' => $user->id,
+                    'error' => $e->getMessage(),
+                ]);
+                // Continue without profile if loading fails
+            }
 
             \Log::info('API /user endpoint called:', [
                 'user_id' => $user->id,
                 'email' => $user->email,
                 'has_profile' => $user->userProfile ? 'yes' : 'no',
-                'profile_data' => $user->userProfile,
             ]);
 
-            $user->gmail = 'gmail';
+            // Remove the gmail assignment as it's not a valid user attribute
+            // $user->gmail = 'gmail';
 
             return response()->json(new UserResource($user));
         } catch (\Exception $e) {
             \Log::error('API /user endpoint error:', [
                 'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
                 'trace' => $e->getTraceAsString(),
             ]);
 
-            return response()->json(['error' => 'Failed to fetch user data'], 500);
+            return response()->json([
+                'error' => 'Failed to fetch user data',
+                'message' => config('app.debug') ? $e->getMessage() : 'An error occurred while fetching user data'
+            ], 500);
         }
     });
     Route::get('/profile', function (Request $request) {
