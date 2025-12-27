@@ -28,18 +28,37 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         // Delete all Sanctum tokens for the authenticated user
-        if ($request->user()) {
-            $request->user()->tokens()->delete();
+        // Support both Bearer token and session-based auth
+        $user = $request->user();
+        if ($user) {
+            $user->tokens()->delete();
         }
 
-        // Clear all relevant cookies with proper settings
-        $cookies = [
-            cookie()->forget('XSRF-TOKEN'),
-            cookie()->forget(config('session.cookie')),
-            cookie()->forget('laravel_session'),
-            cookie()->forget('windap_session'),
-            cookie()->forget('remember_web'),
-            cookie()->forget('remember_token'),
+        // Get session domain from config or use .mrservice.jp as default for cross-subdomain support
+        $sessionDomain = config('session.domain');
+        if (empty($sessionDomain)) {
+            // Extract root domain from request host (e.g., api.mrservice.jp -> .mrservice.jp)
+            $host = $request->getHost();
+            if (preg_match('/\.([^.]+\.(?:jp|com|net|org))$/', $host, $matches)) {
+                $sessionDomain = '.' . $matches[1];
+            } else {
+                $sessionDomain = null;
+            }
+        } else {
+            // Ensure domain starts with dot for subdomain sharing
+            if (substr($sessionDomain, 0, 1) !== '.') {
+                $sessionDomain = '.' . $sessionDomain;
+            }
+        }
+
+        // Clear all relevant cookies with proper domain settings
+        $cookieNames = [
+            'XSRF-TOKEN',
+            config('session.cookie'),
+            'laravel_session',
+            'windap_session',
+            'remember_web',
+            'remember_token',
         ];
 
         $response = response()->json([
@@ -47,19 +66,33 @@ class AuthController extends Controller
             'success' => true,
         ], Response::HTTP_OK);
 
-        // Apply all cookie deletions with different path and domain combinations
-        foreach ($cookies as $cookie) {
-            $response->withCookie($cookie);
-
-            // Also clear with different paths
-            $response->withCookie(cookie()->forget($cookie->getName(), '/api'));
-            $response->withCookie(cookie()->forget($cookie->getName(), '/sanctum'));
+        // Clear cookies with different path and domain combinations
+        $paths = ['/', '/api', '/sanctum'];
+        foreach ($cookieNames as $cookieName) {
+            if (empty($cookieName)) {
+                continue;
+            }
+            
+            foreach ($paths as $path) {
+                // Clear without domain
+                $response->withCookie(cookie()->forget($cookieName, $path));
+                
+                // Clear with session domain if available
+                if ($sessionDomain) {
+                    $response->withCookie(
+                        cookie()->forget($cookieName, $path)
+                            ->domain($sessionDomain)
+                    );
+                }
+            }
         }
 
         // Clear session data
-        $request->session()->flush();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        if ($request->hasSession()) {
+            $request->session()->flush();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        }
 
         return $response;
     }
