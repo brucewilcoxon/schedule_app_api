@@ -36,7 +36,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::get('/windNotes', [WindNoteController::class, 'index'])->name('windNote.index');
 Route::get('/questions', [QuestionController::class, 'index'])->name('question.index');
-Route::get('/calendars', [CalendarEventController::class, 'index'])->name('calendarEvent.index');
+Route::get('/calendar', [CalendarEventController::class, 'index'])->name('calendarEvent.index');
 Route::get('/answers', [AnswerController::class, 'index'])->name('answer.index');
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 
@@ -52,39 +52,25 @@ Route::middleware(['auth:sanctum'])->group(function () {
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
 
-            // Safely load userProfile - handle case where relationship might not exist
-            try {
-                $user->load('userProfile');
-            } catch (\Exception $e) {
-                \Log::warning('Failed to load userProfile:', [
-                    'user_id' => $user->id,
-                    'error' => $e->getMessage(),
-                ]);
-                // Continue without profile if loading fails
-            }
+            $user->load('userProfile');
 
             \Log::info('API /user endpoint called:', [
                 'user_id' => $user->id,
                 'email' => $user->email,
                 'has_profile' => $user->userProfile ? 'yes' : 'no',
+                'profile_data' => $user->userProfile,
             ]);
 
-            // Remove the gmail assignment as it's not a valid user attribute
-            // $user->gmail = 'gmail';
+            $user->gmail = 'gmail';
 
             return response()->json(new UserResource($user));
         } catch (\Exception $e) {
             \Log::error('API /user endpoint error:', [
                 'message' => $e->getMessage(),
-                'file' => $e->getFile(),
-                'line' => $e->getLine(),
                 'trace' => $e->getTraceAsString(),
             ]);
 
-            return response()->json([
-                'error' => 'Failed to fetch user data',
-                'message' => config('app.debug') ? $e->getMessage() : 'An error occurred while fetching user data'
-            ], 500);
+            return response()->json(['error' => 'Failed to fetch user data'], 500);
         }
     });
     Route::get('/profile', function (Request $request) {

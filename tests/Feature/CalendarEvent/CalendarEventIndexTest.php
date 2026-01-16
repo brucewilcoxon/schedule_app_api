@@ -26,7 +26,7 @@ class CalendarEventIndexTest extends TestCase
             ]);
         }
 
-        $response = $this->getJson('/api/calendars');
+        $response = $this->getJson('/api/calendar                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ');
 
         $response->assertStatus(200);
     }

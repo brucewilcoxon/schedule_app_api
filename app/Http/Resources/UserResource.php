@@ -23,13 +23,7 @@ class UserResource extends JsonResource
                 : null,
         ];
 
-        // Log safely without trying to serialize the resource
-        \Log::info('UserResource data:', [
-            'id' => $data['id'],
-            'email' => $data['email'],
-            'role' => $data['role'],
-            'has_profile' => $data['user_profile'] !== null,
-        ]);
+        \Log::info('UserResource data:', $data);
 
         return $data;
     }
