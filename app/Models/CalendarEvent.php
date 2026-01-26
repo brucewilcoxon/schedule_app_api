@@ -13,6 +13,7 @@ class CalendarEvent extends Model
         'user_id',
         'start',
         'end',
+        'time_period',
         'vehicle_info',
         'repair_type',
         'work_type',

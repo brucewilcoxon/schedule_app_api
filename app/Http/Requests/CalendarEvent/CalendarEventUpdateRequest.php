@@ -31,6 +31,11 @@ class CalendarEventUpdateRequest extends FormRequest
                 'date',
                 'after_or_equal:start',
             ],
+            'time_period' => [
+                'nullable',
+                'string',
+                'in:午前,午後',
+            ],
             'vehicle_info' => [
                 'nullable',
                 'string',
